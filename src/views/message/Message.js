@@ -8,13 +8,27 @@ class Message extends Component {
 	constructor(props) {
 		super(props)
 		this.state = { 
-			loading: false
+			loading: false,
+			leave: false
 		}
 	}
 	
 	routerWillLeave(nextLocation){
-		let leave = true
-		return leave
+		if(!this.state.leave){
+			let _self = this
+			Confirm({
+				title: '温馨提示',
+				content: '总结尚未提交，确认要离开？',
+				onOk(){
+					_self.state.leave = true
+					_self.props.router.push(nextLocation)
+				},
+				onCancel(){
+				
+				}
+			})
+		}
+		return this.state.leave
     }
 	
 	subSum(){
@@ -23,7 +37,7 @@ class Message extends Component {
 			title: '温馨提示',
 			content: '总结提交后不能修改，确认要提交？',
 			onOk(){
-				_self.props.router.setRouteLeaveHook(_self.props.route, null)
+				_self.state.leave = true
 				_self.props.router.push({ pathname: '/user' })
 			},
 			onCancel(){
@@ -64,7 +78,7 @@ class Message extends Component {
 	}
 	
 	componentDidMount(){
-		this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave)
+		this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this))
 		this.props.catchCurrent('2')
 	}
 }

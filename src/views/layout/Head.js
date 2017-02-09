@@ -38,12 +38,14 @@ class Head extends Component {
 		
 		return (
 			<Header className="jql-head">
-				<div className="jql-logo pull-left"></div>
+				<Link to="/user/totallist" className="jql-logo pull-left"></Link>
 				<div className="slogan pull-left"></div>
 				<div className="pull-right head-btn">
 					<Dropdown overlay={ menu }>
 						<Button>
-							<Icon type="user" />User Name<Icon type="down" />
+							<Icon type="user" />
+							用户名
+							<Icon type="down" />
 						</Button>
 					</Dropdown>
 				</div>
