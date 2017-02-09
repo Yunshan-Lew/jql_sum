@@ -49,7 +49,7 @@ class Inside extends Component {
 	}
 	
 	componentWillMount(){
-		console.log('Welcome to ' + this.props.location.pathname);
+		console.log('Welcome to ' + this.props.location.pathname)
 	}
 	
 	render(){

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Form, Button } from 'antd'; 
+import { Breadcrumb, Form, Button, Modal } from 'antd'; 
 
 const FormItem = Form.Item
+const Confirm = Modal.confirm
 
 class Message extends Component {
 	constructor(props) {
@@ -12,13 +13,23 @@ class Message extends Component {
 	}
 	
 	routerWillLeave(nextLocation){
-		const leave = confirm('总结尚未提交，确认要离开本页面？')
+		let leave = true
 		return leave
     }
 	
 	subSum(){
-		this.props.router.setRouteLeaveHook(this.props.route, null)
-		this.props.router.push({ pathname: '/user' })
+		let _self = this
+		Confirm({
+			title: '温馨提示',
+			content: '总结提交后不能修改，确认要提交？',
+			onOk(){
+				_self.props.router.setRouteLeaveHook(_self.props.route, null)
+				_self.props.router.push({ pathname: '/user' })
+			},
+			onCancel(){
+			
+			}
+		})
 	}
 	
 	componentWillMount(){
@@ -42,7 +53,7 @@ class Message extends Component {
 							<textarea className="text-area"></textarea>
 						</FormItem>
 						<FormItem className="text-center">
-							<Button type="primary" icon="upload" loading={ this.state.loading } onClick={ this.subSum.bind(this) }>
+							<Button type="primary" size="large" icon="upload" loading={ this.state.loading } onClick={ this.subSum.bind(this) }>
 								提交总结
 							</Button>
 						</FormItem>

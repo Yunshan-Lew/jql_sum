@@ -24,10 +24,14 @@ class Head extends Component {
 		const menu = (
 			<Menu>
 				<Menu.Item key="1">
-					<Link to="/user/message">提交总结</Link>
+					<Link to="/user/message">
+						<Icon type="edit" /> 提交总结
+					</Link>
 				</Menu.Item>
 				<Menu.Item key="2">
-					<a onClick={ this.exit.bind(this) }>退出</a>
+					<a onClick={ this.exit.bind(this) }>
+						<Icon type="logout" /> 退出
+					</a>
 				</Menu.Item>
 			</Menu>
 		);
@@ -35,10 +39,11 @@ class Head extends Component {
 		return (
 			<Header className="jql-head">
 				<div className="jql-logo pull-left"></div>
+				<div className="slogan pull-left"></div>
 				<div className="pull-right head-btn">
 					<Dropdown overlay={ menu }>
 						<Button>
-							User Name <Icon type="down" />
+							<Icon type="user" />User Name<Icon type="down" />
 						</Button>
 					</Dropdown>
 				</div>

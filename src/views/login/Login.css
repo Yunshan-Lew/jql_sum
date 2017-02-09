@@ -1,3 +1,5 @@
-:local(.login-logo){width:150px;height:150px;background:url(../../assets/logo@1x.png) center bottom no-repeat;margin:0 auto;}
+:local(.login-logo){width:150px;height:220px;background:url(../../assets/logo@1x.png) center bottom no-repeat;margin:0 auto;}
 :local(.login-form){width:300px;margin:30px auto;}
-:local(.login-button){width:100%;}
+:local(.login-button){width:100%;background:#ff790b !important;border-color:#ff790b !important;}
+:local(.login-bt){position:fixed;left:0;bottom:40px;width:100%;}
+:local(.login-bg){background:url(../../assets/jingxuan017.jpg) center no-repeat !important;}

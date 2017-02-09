@@ -6,6 +6,7 @@ body {
 	font-family:"Hiragino Sans GB", "Microsoft Yahei", "Microsoft Yahei UI", '微软雅黑', 'sans-serif';
 	font-size:14px;
 	min-width:1080px;
+	color:#333;
 }
 .bg-gray{background:#ececec;}
 .bg-fff{background:#fff;}
@@ -17,6 +18,7 @@ body {
 
 .jql-head{background:#fff;height:90px;border-bottom:1px solid #ddd;}
 .jql-logo{width:150px;height:38px;background:url(./assets/logo@1x.png) center no-repeat;margin:26px 0 0 0;}
+.slogan{width:128px;height:24px;background:url(./assets/slogan@1x.png) center no-repeat;margin:33px 0 0 10px;}
 .head-btn{margin-top:31px;height:28px;line-height:28px;}
 .ant-menu-inline > .ant-menu-item.menu-high{height:49px;line-height:49px;}
 .jql-footer{height:90px;background:#fff;border-top:1px solid #ddd;}
@@ -26,4 +28,4 @@ body {
 .bd-cnt{margin:15px 0 15px 45px;}
 .sum-form{margin:0 30px;}
 .sum-form label{font-size:14px;font-weight:700;}
-.text-area{width:100%;height:200px;border-radius:6px;font-size:14px;line-height:1.6;border-color:#ccc;}
+.text-area{width:100%;height:200px;border-radius:6px;font-size:14px;line-height:1.6;border-color:#ccc;resize:none;}

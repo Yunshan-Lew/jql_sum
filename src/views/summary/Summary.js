@@ -27,7 +27,7 @@ class Summary extends Component {
 					</Breadcrumb>
 				</div>
 				<div className="cnt-inner">
-					<Row gutter={40}>
+					<Row gutter={ 40 }>
 						<Col span="12">
 							<Card title="Alice的本周总结">
 								本周已完成内容。。。

@@ -42,7 +42,7 @@ class User extends Component {
 							</Menu.Item>
 							<Menu.Item key="2" className="menu-high">
 								<Link to="/user/message">
-									<Icon type="user" className="font-14" />
+									<Icon type="edit" className="font-14" />
 									<span className="nav-text font-14">总结提交</span>
 								</Link>
 							</Menu.Item>
