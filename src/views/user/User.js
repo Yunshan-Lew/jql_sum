@@ -52,7 +52,7 @@ class User extends Component {
 						{ 
 							this.props.children && React.cloneElement(this.props.children, {
 								catchCurrent: this.catchCurrent.bind(this)
-							}) 
+							})
 						}
 					</Content>
 				</Layout>

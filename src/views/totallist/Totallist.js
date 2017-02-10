@@ -18,12 +18,12 @@ const columns = [{
 	render: (text, record) => (
 		<Link to="/user/inside">查看详情</Link>
 	)
-}];
+}]
 
 class TotalList extends Component {
 	
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			data: [{
 				key: 1,
@@ -38,7 +38,7 @@ class TotalList extends Component {
 				sum_index: '1970年1月第1期总结汇总',
 				sum_date: '1970-01-01'
 			}]
-		};
+		}
 	}
 	
 	render() {

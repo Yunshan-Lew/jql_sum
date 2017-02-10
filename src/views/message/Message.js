@@ -9,7 +9,8 @@ class Message extends Component {
 		super(props)
 		this.state = { 
 			loading: false,
-			leave: false
+			leave: false,
+			onTime: true
 		}
 	}
 	
@@ -31,6 +32,17 @@ class Message extends Component {
 		return this.state.leave
     }
 	
+	notOnTime(){
+		Modal.info({
+			title: '温馨提示',
+			content: (
+				<div>
+					<p>为确保完整性，每周总结只能在周五提交</p>
+				</div>
+			)
+		})
+	}
+	
 	subSum(){
 		let _self = this
 		Confirm({
@@ -39,9 +51,6 @@ class Message extends Component {
 			onOk(){
 				_self.state.leave = true
 				_self.props.router.push({ pathname: '/user' })
-			},
-			onCancel(){
-			
 			}
 		})
 	}
@@ -61,15 +70,23 @@ class Message extends Component {
 				<div className="cnt-inner">
 					<Form className="sum-form">
 						<FormItem label="本周总结">
-							<textarea className="text-area"></textarea>
+							<textarea className="text-area" disabled={ !this.state.onTime }></textarea>
 						</FormItem>
 						<FormItem label="下周计划">
-							<textarea className="text-area"></textarea>
+							<textarea className="text-area" disabled={ !this.state.onTime }></textarea>
 						</FormItem>
 						<FormItem className="text-center">
-							<Button type="primary" size="large" icon="upload" loading={ this.state.loading } onClick={ this.subSum.bind(this) }>
-								提交总结
-							</Button>
+							{
+								this.state.onTime ?
+								(
+									<Button type="primary" size="large" icon="upload" loading={ this.state.loading } onClick={ this.subSum.bind(this) }>
+										提交总结
+									</Button>
+								) :
+								(
+									<Button type="danger" size="large" icon="exclamation-circle-o">请到周五再来填写</Button>
+								)
+							}
 						</FormItem>
 					</Form>
 				</div>
@@ -78,8 +95,16 @@ class Message extends Component {
 	}
 	
 	componentDidMount(){
-		this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this))
 		this.props.catchCurrent('2')
+		if(new Date().getDay() !== 5){
+			// 设为无效
+			this.notOnTime()
+			this.setState({ onTime: false })
+		}
+		else{
+			// 设未完离开提示
+			this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this))
+		}
 	}
 }
 

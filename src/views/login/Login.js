@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { loginIn } from '../../actions/actionLogin'
 import { loginInfo } from '../../reducers/reducerLogin';
 import { Form, Icon, Input, Button, Layout } from 'antd';
+import reqwest from 'reqwest';
+
 import styles from './Login.css';
 
 const FormItem = Form.Item
@@ -23,26 +25,34 @@ class Login extends Component {
 	
 	checkUser(){
 		if(this.state.user.length < 1){
-			this.setState({ userError: 'error' })
-			this.setState({ userMsg: '请正确填写用户名' })
+			this.setState({ 
+				userError: 'error', 
+				userMsg: '请正确填写用户名' 
+			})
 			return false
 		}
 		else{
-			this.setState({ userError: '' })
-			this.setState({ userMsg: '' })
+			this.setState({ 
+				userError: '', 
+				userMsg: '' 
+			})
 			return true
 		}
 	}
 	
 	checkPass(){
 		if(this.state.password.length < 3){
-			this.setState({ passError: 'error' })
-			this.setState({ passMsg: '请正确填写密码' })
+			this.setState({ 
+				passError: 'error', 
+				passMsg: '请正确填写密码' 
+			})
 			return false
 		}
 		else{
-			this.setState({ passError: '' })
-			this.setState({ passMsg: '' })
+			this.setState({ 
+				passError: '',
+				passMsg: ''
+			})
 			return true
 		}
 	}
@@ -93,6 +103,16 @@ class Login extends Component {
 		
 	componentDidMount(){
 		this.setState({ minH: ( document.documentElement.clientHeight ) + 'px' })
+		reqwest({
+			url: '/',
+			method: 'post',
+			data: { 'fuck': 'you' },
+			type: 'json'
+		}).then((res) => {
+			console.log('request succeed')
+		}, (err, msg) => {
+			console.log('request falied')
+		})
 	}
 			
 }
