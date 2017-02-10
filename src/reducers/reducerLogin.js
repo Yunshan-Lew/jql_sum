@@ -1,5 +1,5 @@
 const loginInfo = {
-	loginStatus: true
+	loginStatus: false
 }
 
 const todos = (state = loginInfo, action) => {

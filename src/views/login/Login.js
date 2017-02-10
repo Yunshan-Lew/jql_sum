@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import { loginIn } from '../../actions/actionLogin'
+import * as actionLogin from '../../actions/actionLogin';
 import { loginInfo } from '../../reducers/reducerLogin';
 import { Form, Icon, Input, Button, Layout } from 'antd';
 import reqwest from 'reqwest';
@@ -67,8 +68,7 @@ class Login extends Component {
 	
 	entry(){
 		if( this.checkUser.bind(this)() && this.checkPass.bind(this)() ){
-			let { dispatch } = this.props
-			dispatch(loginIn())
+			this.props.loginIn() // 方式2 - redux下引用actions
 			location.hash = '/user/totallist'
 		}
 	}
@@ -117,4 +117,9 @@ class Login extends Component {
 			
 }
 
-export default connect()(Login);
+// lead actions into this component
+function mapDispatchToProps(dispatch){
+	return bindActionCreators(actionLogin, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Login);
