@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import * as actionLogin from '../../actions/actionLogin';
+import { loginIn } from '../../actions/actionLogin';
+import { test } from '../../actions/actionTest';
 import { loginInfo } from '../../reducers/reducerLogin';
+import { testInfo } from '../../reducers/reducerTest';
 import { Form, Icon, Input, Button, Layout } from 'antd';
 import reqwest from 'reqwest';
 
@@ -42,7 +44,7 @@ class Login extends Component {
 	}
 	
 	checkPass(){
-		if(this.state.password.length < 3){
+		if(this.state.password.length < 6){
 			this.setState({ 
 				passError: 'error', 
 				passMsg: '请正确填写密码' 
@@ -50,7 +52,7 @@ class Login extends Component {
 			return false
 		}
 		else{
-			this.setState({ 
+			this.setState({
 				passError: '',
 				passMsg: ''
 			})
@@ -106,20 +108,24 @@ class Login extends Component {
 		reqwest({
 			url: '/',
 			method: 'post',
-			data: { 'fuck': 'you' },
+			data: { "fuck": "you" },
 			type: 'json'
 		}).then((res) => {
 			console.log('request succeed')
 		}, (err, msg) => {
 			console.log('request falied')
 		})
+		console.log(testInfo.testMsg)
+		this.props.test()
 	}
 			
 }
 
+const actions = { loginIn, test }
+
 // lead actions into this component
 function mapDispatchToProps(dispatch){
-	return bindActionCreators(actionLogin, dispatch)
+	return bindActionCreators(actions, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(Login);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { loginInfo } from '../../reducers/reducerLogin';
+import { testInfo } from '../../reducers/reducerTest';
 
 import { Layout, Menu, Icon } from 'antd';
 import Head from '../layout/Head';
@@ -63,6 +64,7 @@ class User extends Component {
 	
 	componentDidMount(){
 		this.setState({ minH: ( document.documentElement.clientHeight - 180 ) + 'px' })
+		console.log(testInfo.testMsg)
 	}
 }
 
