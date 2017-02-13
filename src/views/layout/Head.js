@@ -16,7 +16,7 @@ class Head extends Component {
 	
 	exit(){
 		let { dispatch } = this.props
-		dispatch(loginOut()) // 方式1 - 直接引用actions
+		dispatch(loginOut()) // 方式 - 直接引用actions
 		location.hash = '/login'
 	}
 	

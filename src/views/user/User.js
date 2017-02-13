@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { loginInfo } from '../../reducers/reducerLogin';
-import { testInfo } from '../../reducers/reducerTest';
+import { connect } from 'react-redux';
 
 import { Layout, Menu, Icon } from 'antd';
 import Head from '../layout/Head';
@@ -25,7 +24,7 @@ class User extends Component {
 	}
 	
 	componentWillMount(){
-		if(!loginInfo.loginStatus)this.props.router.push({ pathname: '/login' })
+		if(!this.props.loginStatus)this.props.router.push({ pathname: '/login' })
 	}
 	
 	render(){
@@ -64,8 +63,16 @@ class User extends Component {
 	
 	componentDidMount(){
 		this.setState({ minH: ( document.documentElement.clientHeight - 180 ) + 'px' })
-		console.log(testInfo.testMsg)
+		console.log(this.props.testMsg)
 	}
 }
 
-export default User
+// lead stores in
+function mapStateToProps(state){
+	return {
+		loginStatus: state.todos.loginStatus,
+		testMsg: state.testTodos.testMsg
+	}
+}
+
+export default connect(mapStateToProps)(User)

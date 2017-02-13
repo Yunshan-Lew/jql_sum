@@ -3,10 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { loginIn } from '../../actions/actionLogin';
 import { test } from '../../actions/actionTest';
-import { loginInfo } from '../../reducers/reducerLogin';
-import { testInfo } from '../../reducers/reducerTest';
 import { Form, Icon, Input, Button, Layout } from 'antd';
-import reqwest from 'reqwest';
+// import reqwest from 'reqwest';
 
 import styles from './Login.css';
 
@@ -70,13 +68,13 @@ class Login extends Component {
 	
 	entry(){
 		if( this.checkUser.bind(this)() && this.checkPass.bind(this)() ){
-			this.props.loginIn() // 方式2 - redux下引用actions
+			this.props.loginIn() // 方式 - redux下引用actions
 			location.hash = '/user/totallist'
 		}
 	}
 	
 	componentWillMount(){
-		if(loginInfo.loginStatus)this.props.router.push({ pathname: '/user/totallist' })
+		if(this.props.loginStatus)this.props.router.push({ pathname: '/user/totallist' })
 	}
 	
 	render(){
@@ -88,7 +86,7 @@ class Login extends Component {
 						<Input addonBefore={<Icon type="user" />} placeholder="用户名" value={ this.state.user } onChange={ this.userChange.bind(this) } />
 					</FormItem>
 					<FormItem validateStatus={ this.state.passError } help={ this.state.passMsg }>
-						 <Input addonBefore={<Icon type="lock" />} type="password" placeholder="登录密码" value={ this.state.password } onChange={ this.passChange.bind(this) } />
+						<Input addonBefore={<Icon type="lock" />} type="password" placeholder="登录密码" value={ this.state.password } onChange={ this.passChange.bind(this) } />
 					</FormItem>
 					<FormItem>
 						<Button type="primary" size="large" htmlType="submit" className={ styles['login-button'] } onClick={ this.entry.bind(this) }>
@@ -105,7 +103,7 @@ class Login extends Component {
 		
 	componentDidMount(){
 		this.setState({ minH: ( document.documentElement.clientHeight ) + 'px' })
-		reqwest({
+		/*reqwest({
 			url: '/',
 			method: 'post',
 			data: { "fuck": "you" },
@@ -114,8 +112,8 @@ class Login extends Component {
 			console.log('request succeed')
 		}, (err, msg) => {
 			console.log('request falied')
-		})
-		console.log(testInfo.testMsg)
+		})*/
+		console.log(this.props.testMsg)
 		this.props.test()
 	}
 			
@@ -123,9 +121,17 @@ class Login extends Component {
 
 const actions = { loginIn, test }
 
-// lead actions into this component
+// lead stores in
+function mapStateToProps(state){
+	return {
+		loginStatus: state.todos.loginStatus,
+		testMsg: state.testTodos.testMsg
+	}
+}
+
+// lead actions in
 function mapDispatchToProps(dispatch){
 	return bindActionCreators(actions, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

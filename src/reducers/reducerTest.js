@@ -5,9 +5,9 @@ const testInfo = {
 const testTodos = (state = testInfo, action) => {
 	switch (action.type) {
 		case 'TEST':
-			{
-				testInfo.testMsg = '试验-1登陆完成'
-				return state
+			return {
+				...state,
+				testMsg: '试验-1登陆完成'
 			}
 		default:
 			return state

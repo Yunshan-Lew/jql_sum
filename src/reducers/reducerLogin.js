@@ -5,14 +5,14 @@ const loginInfo = {
 const todos = (state = loginInfo, action) => {
 	switch (action.type) {
 		case 'LOGIN_OUT':
-			{
-				loginInfo.loginStatus = false
-				return state
+			return {
+				...state,
+				loginStatus: false
 			}
 		case 'LOGIN_IN':
-			{
-				loginInfo.loginStatus = true
-				return state
+			return {
+				...state,
+				loginStatus: true
 			}
 		default:
 			return state
