@@ -122,16 +122,12 @@ class Login extends Component {
 const actions = { loginIn, test }
 
 // lead stores in
-function mapStateToProps(state){
-	return {
-		loginStatus: state.todos.loginStatus,
-		testMsg: state.testTodos.testMsg
-	}
-}
+const mapStateToProps = state => ({
+	loginStatus: state.todos.loginStatus,
+	testMsg: state.testTodos.testMsg
+})
 
 // lead actions in
-function mapDispatchToProps(dispatch){
-	return bindActionCreators(actions, dispatch)
-}
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

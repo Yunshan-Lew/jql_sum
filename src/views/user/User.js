@@ -68,11 +68,9 @@ class User extends Component {
 }
 
 // lead stores in
-function mapStateToProps(state){
-	return {
-		loginStatus: state.todos.loginStatus,
-		testMsg: state.testTodos.testMsg
-	}
-}
+const mapStateToProps = state => ({
+	loginStatus: state.todos.loginStatus,
+	testMsg: state.testTodos.testMsg
+})
 
 export default connect(mapStateToProps)(User)

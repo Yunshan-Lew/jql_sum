@@ -1,5 +1,5 @@
 const loginInfo = {
-	loginStatus: false
+	loginStatus: true
 }
 
 const todos = (state = loginInfo, action) => {
@@ -19,5 +19,4 @@ const todos = (state = loginInfo, action) => {
 	}
 }
 
-export { loginInfo }
 export default todos

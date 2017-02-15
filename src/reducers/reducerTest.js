@@ -14,5 +14,4 @@ const testTodos = (state = testInfo, action) => {
 	}
 }
 
-export { testInfo }
 export default testTodos
