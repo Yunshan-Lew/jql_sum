@@ -53,9 +53,9 @@ const App = React.createClass({
 
 ReactDOM.render(
 	<Router history={ history }>
-		<Route path="/" component={ App }>
+		<Route path="/" component={ App } >
 			<Route path="login" component={ Login } />
-			<Route path="user" component={ User }> 
+			<Route path="user" component={ User } > 
 				<IndexRoute component={ TotalList } />
 				<Route path="totallist" component={ TotalList } />
 				<Route path="inside" component={ Inside } />

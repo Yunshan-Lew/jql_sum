@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { pullLogin } from '../../actions/actionLogin';
 
 import { Layout, Menu, Icon } from 'antd';
 import Head from '../layout/Head';
@@ -24,6 +26,7 @@ class User extends Component {
 	}
 	
 	componentWillMount(){
+		this.props.pullLogin()
 		if(!this.props.loginStatus)this.props.router.push({ pathname: '/login' })
 	}
 	
@@ -67,10 +70,15 @@ class User extends Component {
 	}
 }
 
+const actions = { pullLogin }
+
 // lead stores in
 const mapStateToProps = state => ({
 	loginStatus: state.todos.loginStatus,
 	testMsg: state.testTodos.testMsg
 })
 
-export default connect(mapStateToProps)(User)
+// lead actions in
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(User)

@@ -1,5 +1,5 @@
 const loginInfo = {
-	loginStatus: true
+	loginStatus: null
 }
 
 const todos = (state = loginInfo, action) => {
@@ -9,11 +9,19 @@ const todos = (state = loginInfo, action) => {
 				...state,
 				loginStatus: false
 			}
-		case 'LOGIN_IN':
+		
+		case 'LOGIN_IN': 
 			return {
 				...state,
 				loginStatus: true
 			}
+		
+		case 'PULL_LOGIN': 
+			return {
+				...state,
+				loginStatus: action.result
+			}
+			
 		default:
 			return state
 	}

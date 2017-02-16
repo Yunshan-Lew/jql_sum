@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loginIn } from '../../actions/actionLogin';
+import { loginIn, pullLogin } from '../../actions/actionLogin';
 import { test } from '../../actions/actionTest';
 import { Form, Icon, Input, Button, Layout } from 'antd';
 // import reqwest from 'reqwest';
@@ -74,6 +74,7 @@ class Login extends Component {
 	}
 	
 	componentWillMount(){
+		this.props.pullLogin()
 		if(this.props.loginStatus)this.props.router.push({ pathname: '/user/totallist' })
 	}
 	
@@ -119,7 +120,7 @@ class Login extends Component {
 			
 }
 
-const actions = { loginIn, test }
+const actions = { loginIn, pullLogin, test }
 
 // lead stores in
 const mapStateToProps = state => ({

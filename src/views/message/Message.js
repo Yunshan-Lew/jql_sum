@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Form, Button, Modal } from 'antd'; 
+import { Breadcrumb, Form, Button, Modal } from 'antd';
 
 const FormItem = Form.Item
 const Confirm = Modal.confirm

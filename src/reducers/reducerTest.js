@@ -7,7 +7,7 @@ const testTodos = (state = testInfo, action) => {
 		case 'TEST':
 			return {
 				...state,
-				testMsg: '试验-1登陆完成'
+				testMsg: action.testMsg
 			}
 		default:
 			return state
