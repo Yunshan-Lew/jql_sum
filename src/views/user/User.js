@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { pullLogin } from '../../actions/actionLogin';
+import { pullLogin, pullToken } from '../../actions/actionLogin';
 
 import { Layout, Menu, Icon } from 'antd';
 import Head from '../layout/Head';
@@ -26,6 +26,7 @@ class User extends Component {
 	}
 	
 	componentWillMount(){
+		this.props.pullToken()
 		this.props.pullLogin()
 		if(!this.props.loginStatus)this.props.router.push({ pathname: '/login' })
 	}
@@ -66,15 +67,16 @@ class User extends Component {
 	
 	componentDidMount(){
 		this.setState({ minH: ( document.documentElement.clientHeight - 180 ) + 'px' })
-		console.log(this.props.testMsg)
+		console.log(`${ this.props.testMsg }, the token is ${ this.props.token }`)
 	}
 }
 
-const actions = { pullLogin }
+const actions = { pullLogin, pullToken }
 
 // lead stores in
 const mapStateToProps = state => ({
 	loginStatus: state.todos.loginStatus,
+	token: state.todos.token,
 	testMsg: state.testTodos.testMsg
 })
 

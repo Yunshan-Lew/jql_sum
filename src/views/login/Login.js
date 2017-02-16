@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loginIn, pullLogin } from '../../actions/actionLogin';
+import { loginIn, pullLogin, pushToken } from '../../actions/actionLogin';
 import { test } from '../../actions/actionTest';
 import { Form, Icon, Input, Button, Layout } from 'antd';
 // import reqwest from 'reqwest';
@@ -68,7 +68,8 @@ class Login extends Component {
 	
 	entry(){
 		if( this.checkUser.bind(this)() && this.checkPass.bind(this)() ){
-			this.props.loginIn() // 方式 - redux下引用actions
+			this.props.loginIn() // 方式 - redux下引用actions	
+			this.props.pushToken('cutterman')
 			location.hash = '/user/totallist'
 		}
 	}
@@ -120,7 +121,7 @@ class Login extends Component {
 			
 }
 
-const actions = { loginIn, pullLogin, test }
+const actions = { loginIn, pullLogin, pushToken, test }
 
 // lead stores in
 const mapStateToProps = state => ({
