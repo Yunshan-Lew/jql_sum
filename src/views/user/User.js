@@ -28,13 +28,12 @@ class User extends Component {
 	componentWillMount(){
 		this.props.pullToken()
 		this.props.pullLogin()
-		if(!this.props.loginStatus)this.props.router.push({ pathname: '/login' })
 	}
 	
 	render(){
 		return (
 			<Layout>
-				<Head></Head>
+				<Head routerPush={ this.props.router.push }></Head>
 				<Layout className="mid-box" style={{ minHeight: this.state.minH }}>
 					<Sider>
 						 <Menu theme="dark" mode="inline" selectedKeys={ [this.state.current] } className="jql-menu">
@@ -67,8 +66,17 @@ class User extends Component {
 	
 	componentDidMount(){
 		this.setState({ minH: ( document.documentElement.clientHeight - 180 ) + 'px' })
-		console.log(`${ this.props.testMsg }, the token is ${ this.props.token }`)
 	}
+	
+	componentDidUpdate(){
+		if(!this.props.loginStatus){
+			this.props.router.push({ pathname: '/login' })
+		}
+		else {
+			console.log(`${ this.props.testMsg }, the token is ${ this.props.token }`)
+		}
+	}
+	
 }
 
 const actions = { pullLogin, pullToken }

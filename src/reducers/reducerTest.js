@@ -1,5 +1,5 @@
 const testInfo = {
-	testMsg: '试验-1登陆就绪'
+	testMsg: '试验-1就绪'
 }
 
 const testTodos = (state = testInfo, action) => {

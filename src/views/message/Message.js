@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Form, Button, Modal } from 'antd';
+import { Breadcrumb, Form, Button, Modal, Popover } from 'antd';
 
 const FormItem = Form.Item
 const Confirm = Modal.confirm
@@ -10,7 +10,8 @@ class Message extends Component {
 		this.state = { 
 			loading: false,
 			leave: false,
-			onTime: true
+			onTime: true,
+			popverMsg: '换行不要忘了打句号哦'
 		}
 	}
 	
@@ -70,10 +71,14 @@ class Message extends Component {
 				<div className="cnt-inner">
 					<Form className="sum-form">
 						<FormItem label="本周总结">
-							<textarea className="text-area" disabled={ !this.state.onTime }></textarea>
+							<Popover content={ this.state.popverMsg } title="温馨提示" trigger="focus" >
+								<textarea className="text-area" disabled={ !this.state.onTime }></textarea>
+							</Popover>
 						</FormItem>
 						<FormItem label="下周计划">
-							<textarea className="text-area" disabled={ !this.state.onTime }></textarea>
+							<Popover content={ this.state.popverMsg } title="温馨提示" trigger="focus" >
+								<textarea className="text-area" disabled={ !this.state.onTime }></textarea>
+							</Popover>
 						</FormItem>
 						<FormItem className="text-center">
 							{

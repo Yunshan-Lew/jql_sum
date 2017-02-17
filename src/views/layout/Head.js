@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -17,7 +17,7 @@ class Head extends Component {
 	exit(){
 		let { dispatch } = this.props
 		dispatch(loginOut()) // 方式 - 直接引用actions
-		location.hash = '/login'
+		this.props.routerPush({ pathname: '/login' })
 	}
 	
 	render(){
@@ -25,7 +25,7 @@ class Head extends Component {
 			<Menu>
 				<Menu.Item key="1">
 					<Link to="/user/message">
-						<Icon type="edit" /> 提交总结
+						<Icon type="edit" /> 总结提交
 					</Link>
 				</Menu.Item>
 				<Menu.Item key="2">
@@ -34,7 +34,7 @@ class Head extends Component {
 					</a>
 				</Menu.Item>
 			</Menu>
-		);
+		)
 		
 		return (
 			<Header className="jql-head">
@@ -52,6 +52,10 @@ class Head extends Component {
 			</Header>
 		)
 	}
+}
+
+Head.propTypes = {
+	routerPush: PropTypes.func.isRequired
 }
 
 export default connect()(Head);

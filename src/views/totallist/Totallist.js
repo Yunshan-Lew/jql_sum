@@ -53,7 +53,7 @@ class TotalList extends Component {
 					<Table className="table-fixed" columns={ columns } dataSource={ this.state.data } />
 				</div>
 			</div>
-		);
+		)
 	}
 	
 	componentDidMount(){

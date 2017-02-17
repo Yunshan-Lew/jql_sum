@@ -68,15 +68,14 @@ class Login extends Component {
 	
 	entry(){
 		if( this.checkUser.bind(this)() && this.checkPass.bind(this)() ){
-			this.props.loginIn() // 方式 - redux下引用actions	
-			this.props.pushToken('cutterman')
-			location.hash = '/user/totallist'
+			this.props.loginIn() // 方式 - redux下引用actions
+			this.props.pushToken('5e92504428e3cecc0fbc8')
+			this.props.router.push({ pathname: '/user/totallist' })
 		}
 	}
 	
 	componentWillMount(){
 		this.props.pullLogin()
-		if(this.props.loginStatus)this.props.router.push({ pathname: '/user/totallist' })
 	}
 	
 	render(){
@@ -115,8 +114,11 @@ class Login extends Component {
 		}, (err, msg) => {
 			console.log('request falied')
 		})*/
-		console.log(this.props.testMsg)
 		this.props.test()
+	}
+	
+	componentDidUpdate(){
+		if(this.props.loginStatus)this.props.router.push({ pathname: '/user/totallist' })
 	}
 			
 }

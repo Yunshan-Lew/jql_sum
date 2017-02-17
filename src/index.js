@@ -9,7 +9,6 @@ import reducer from './reducers';
 import { Layout } from 'antd';
 
 import Login from './views/login/Login';
-
 import User from './views/user/User';
 import TotalList from './views/totallist/Totallist';
 import Inside from './views/inside/Inside';
@@ -18,7 +17,7 @@ import Summary from './views/summary/Summary';
 
 import './index.css';
 
-const history = useRouterHistory(createHashHistory)({ 
+const history = useRouterHistory(createHashHistory)({
 	basename: '',
 	queryKey: true
 })

@@ -30,16 +30,18 @@ class Summary extends Component {
 					<Row gutter={ 40 }>
 						<Col span="12">
 							<Card title="Alice的本周总结">
-								本周已完成内容。。。
+								本周已完成内容1。。。<br/>
+								本周已完成内容2。。。
 							</Card>
 						</Col>
 						<Col span="12">
 							<Card title="Alice的下周计划">
-								下周要完成内容。。。
+								下周要完成内容1。。。<br/>
+								下周要完成内容2。。。
 							</Card>
 						</Col>
 					</Row>
-					<div className="text-center mart-30">
+					<div className="text-center mart-60">
 						<Link to="/user/inside">
 							<Button type="primary" size="large" icon="rollback">
 								返回
