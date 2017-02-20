@@ -26,7 +26,7 @@ class Message extends Component {
 					_self.props.router.push(nextLocation)
 				},
 				onCancel(){
-				
+					void(0)
 				}
 			})
 		}

@@ -114,7 +114,7 @@ class Login extends Component {
 		}, (err, msg) => {
 			console.log('request falied')
 		})*/
-		this.props.test()
+		this.props.test('试验-1已启动')
 	}
 	
 	componentDidUpdate(){

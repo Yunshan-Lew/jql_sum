@@ -1,6 +1,6 @@
-const test = () => ({
+const test = (testMsg) => ({
 	type: 'TEST',
-	testMsg: '试验-1运行中'
+	testMsg: testMsg
 })
 
 export { test }
