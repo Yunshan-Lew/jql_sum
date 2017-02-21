@@ -3,6 +3,7 @@
 这是一个React开发的简易周总结系统，通过create-react-app构建工具生成，包含登录、汇总列表、单期列表、用户总结、总结提交等功能。
 
 构建工具的更多信息请参考：https://github.com/facebookincubator/create-react-app
+UI组件的更多信息请参考：https://ant.design/docs/react/introduce-cn
 
 ## 运行
 
@@ -42,6 +43,7 @@ pushstate-server build (http://localhost:9000)
 This is a simple weekly summary system created by React, by the build tool create-react-app，it includes login, totol list, weekly list, user summay, submit summary etc.
 
 For more information of the tool：https://github.com/facebookincubator/create-react-app
+For more information of UI component: https://ant.design/docs/react/introduce
 
 ## Getting Started
 
