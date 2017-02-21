@@ -1,3 +1,5 @@
+# 一个React构建的周总结系统
+
 这是一个React开发的简易周总结系统，通过create-react-app构建工具生成，包含登录、汇总列表、单期列表、用户总结、总结提交等功能。
 
 构建工具的更多信息请参考：https://github.com/facebookincubator/create-react-app
@@ -34,6 +36,8 @@ pushstate-server build (http://localhost:9000)
 <img src='./src/assets/logout_interface.png' width='600' alt='登录界面'>
 <img src='./src/assets/login_interface.png' width='600' alt='登入界面'>
 
+
+# A summary system created by React
 
 This is a simple weekly summary system created by React, by the build tool create-react-app，it includes login, totol list, weekly list, user summay, submit summary etc.
 
