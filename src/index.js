@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, useRouterHistory, IndexRedirect } from 'react-router';
-import { createHashHistory } from 'history';
+import { Router, Route, IndexRoute, browserHistory, IndexRedirect } from 'react-router';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
@@ -16,11 +15,6 @@ import Message from './views/message/Message';
 import Summary from './views/summary/Summary';
 
 import './index.css';
-
-const history = useRouterHistory(createHashHistory)({
-	basename: '',
-	queryKey: true
-})
 
 const store = createStore(reducer)
 
@@ -51,15 +45,15 @@ const App = React.createClass({
 });
 
 ReactDOM.render(
-	<Router history={ history }>
+	<Router history={ browserHistory }>
 		<Route path="/" component={ App } >
 			<Route path="login" component={ Login } />
 			<Route path="user" component={ User } > 
 				<IndexRoute component={ TotalList } />
 				<Route path="totallist" component={ TotalList } />
-				<Route path="inside" component={ Inside } />
+				<Route path="inside/:date" component={ Inside } />
+				<Route path="summary/:date" component={ Summary } />
 				<Route path="message" component={ Message } />
-				<Route path="summary" component={ Summary } />
 				<Route path="*" component={ TotalList } />
 			</Route>
 			<IndexRedirect to="/user" />

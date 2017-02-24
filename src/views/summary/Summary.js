@@ -19,7 +19,7 @@ class Summary extends Component {
 							<Link to="/user/totallist">总结汇总</Link>
 						</Breadcrumb.Item>
 						<Breadcrumb.Item>
-							<Link to="/user/inside">总结人列表</Link>
+							<Link to={ "/user/inside/" + this.props.params.date }>总结人列表</Link>
 						</Breadcrumb.Item>
 						<Breadcrumb.Item>
 							总结详情
@@ -42,7 +42,7 @@ class Summary extends Component {
 						</Col>
 					</Row>
 					<div className="text-center mart-60">
-						<Link to="/user/inside">
+						<Link to={ "/user/inside/" + this.props.params.date }>
 							<Button type="primary" size="large" icon="rollback">
 								返回
 							</Button>

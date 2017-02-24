@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import { Breadcrumb, Form, Button, Modal, Popover } from 'antd';
 
 const FormItem = Form.Item
@@ -23,7 +24,7 @@ class Message extends Component {
 				content: '总结尚未提交，确认要离开？',
 				onOk(){
 					_self.state.leave = true
-					_self.props.router.push(nextLocation)
+					browserHistory.push(nextLocation)
 				},
 				onCancel(){
 					void(0)
@@ -51,7 +52,7 @@ class Message extends Component {
 			content: '总结提交后不能修改，确认要提交？',
 			onOk(){
 				_self.state.leave = true
-				_self.props.router.push({ pathname: '/user' })
+				browserHistory.push({ pathname: '/user' })
 			}
 		})
 	}

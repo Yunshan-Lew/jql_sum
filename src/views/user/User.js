@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pullLogin, pullToken } from '../../actions/actionLogin';
@@ -33,7 +33,7 @@ class User extends Component {
 	render(){
 		return (
 			<Layout>
-				<Head routerPush={ this.props.router.push }></Head>
+				<Head routerPush={ browserHistory.push }></Head>
 				<Layout className="mid-box" style={{ minHeight: this.state.minH }}>
 					<Sider>
 						 <Menu theme="dark" mode="inline" selectedKeys={ [this.state.current] } className="jql-menu">
@@ -70,7 +70,7 @@ class User extends Component {
 	
 	componentDidUpdate(){
 		if(!this.props.loginStatus){
-			this.props.router.push({ pathname: '/login' })
+			browserHistory.push({ pathname: '/login' })
 		}
 		else {
 			console.log(`${ this.props.testMsg }, the token is ${ this.props.token }`)

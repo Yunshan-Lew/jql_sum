@@ -16,7 +16,7 @@ const columns = [{
 	dataIndex: 'action',
 	key: 'action',
 	render: (text, record) => (
-		<Link to="/user/inside">查看详情</Link>
+		<Link to={ "/user/inside/" + record.inside_date }>查看详情</Link>
 	)
 }]
 
@@ -28,15 +28,18 @@ class TotalList extends Component {
 			data: [{
 				key: 1,
 				sum_index: '1970年1月第3期总结汇总',
-				sum_date: '1970-01-15'
+				sum_date: '1970-01-15',
+				inside_date: '19700115'
 			}, {
 				key: 2,
 				sum_index: '1970年1月第2期总结汇总',
-				sum_date: '1970-01-08'
+				sum_date: '1970-01-08',
+				inside_date: '19700108'
 			}, {
 				key: 3,
 				sum_index: '1970年1月第1期总结汇总',
-				sum_date: '1970-01-01'
+				sum_date: '1970-01-01',
+				inside_date: '19700101'
 			}]
 		}
 	}

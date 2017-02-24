@@ -21,7 +21,7 @@ const columns = [{
 	dataIndex: 'action',
 	key: 'action',
 	render: (text, record) => (
-		<Link to="/user/summary">查看详情</Link>
+		<Link to={ "/user/summary/" + record.summary_date }>查看详情</Link>
 	)
 }];
 
@@ -33,17 +33,20 @@ class Inside extends Component {
 				key: 1,
 				sum_person: 'Alice',
 				job: '洗碗工',
-				sum_date: '1970-01-15'
+				sum_date: '1970-01-15',
+				summary_date: "19700115"
 			}, {
 				key: 2,
 				sum_person: 'Bob',
 				job: '扫地工',
-				sum_date: '1970-01-15'
+				sum_date: '1970-01-15',
+				summary_date: "19700115"
 			}, {
 				key: 3,
 				sum_person: 'Clinton',
 				job: '搬砖工',
-				sum_date: '1970-01-15'
+				sum_date: '1970-01-15',
+				summary_date: "19700115"
 			}]
 		}
 	}

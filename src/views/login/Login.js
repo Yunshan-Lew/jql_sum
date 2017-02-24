@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { loginIn, pullLogin, pushToken } from '../../actions/actionLogin';
@@ -70,7 +71,7 @@ class Login extends Component {
 		if( this.checkUser.bind(this)() && this.checkPass.bind(this)() ){
 			this.props.loginIn() // 方式 - redux下引用actions
 			this.props.pushToken('5e92504428e3cecc0fbc8')
-			this.props.router.push({ pathname: '/user/totallist' })
+			browserHistory.push({ pathname: '/user/totallist' })
 		}
 	}
 	
@@ -118,7 +119,7 @@ class Login extends Component {
 	}
 	
 	componentDidUpdate(){
-		if(this.props.loginStatus)this.props.router.push({ pathname: '/user/totallist' })
+		if(this.props.loginStatus)browserHistory.push({ pathname: '/user/totallist' })
 	}
 			
 }
