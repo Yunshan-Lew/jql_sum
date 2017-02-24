@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { Breadcrumb, Form, Button, Modal, Popover } from 'antd';
+import CodeMirror from 'react-codemirror';
+
+import 'codemirror/lib/codemirror.css';
 
 const FormItem = Form.Item
 const Confirm = Modal.confirm
@@ -12,7 +15,8 @@ class Message extends Component {
 			loading: false,
 			leave: false,
 			onTime: true,
-			popverMsg: '换行不要忘了打句号哦'
+			popverMsg: '换行不要忘了打句号哦',
+			thisWeek: 'Start from here'
 		}
 	}
 	
@@ -57,11 +61,21 @@ class Message extends Component {
 		})
 	}
 	
+	updateCode(txt){
+        this.setState({
+            thisWeek: txt
+        })
+    }
+	
 	componentWillMount(){
 		
 	}
 	
 	render(){
+		const editorOps = {
+            lineNumbers: true
+        }
+		
 		return (
 			<div>
 				<div className="bd-cnt">
@@ -72,9 +86,7 @@ class Message extends Component {
 				<div className="cnt-inner">
 					<Form className="sum-form">
 						<FormItem label="本周总结">
-							<Popover content={ this.state.popverMsg } title="温馨提示" trigger="focus" >
-								<textarea className="text-area" disabled={ !this.state.onTime }></textarea>
-							</Popover>
+							<CodeMirror value={ this.state.thisWeek } onChange={ this.updateCode.bind(this) } options={ editorOps } />
 						</FormItem>
 						<FormItem label="下周计划">
 							<Popover content={ this.state.popverMsg } title="温馨提示" trigger="focus" >
