@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import { Breadcrumb, Form, Button, Modal, Popover } from 'antd';
+import { Breadcrumb, Form, Button, Modal } from 'antd';
 import CodeMirror from 'react-codemirror';
-
+import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
 
 const FormItem = Form.Item
@@ -16,7 +16,8 @@ class Message extends Component {
 			leave: false,
 			onTime: true,
 			popverMsg: '换行不要忘了打句号哦',
-			thisWeek: 'Start from here'
+			thisWeek: 'const Hello = () => "Here we go!"',
+			nextWeek: 'const Hello = () => "Let us plan!"'
 		}
 	}
 	
@@ -67,13 +68,24 @@ class Message extends Component {
         })
     }
 	
+	updateFuture(txt){
+		this.setState({
+			nextWeek: txt
+		})
+	}
+	
 	componentWillMount(){
 		
 	}
 	
 	render(){
 		const editorOps = {
-            lineNumbers: true
+            lineNumbers: true,
+			cursorBlinkRate: 400,
+			showCursorWhenSelecting: true,
+			theme: 'monokai',
+			mode: 'javascript',
+			readOnly: !this.state.onTime
         }
 		
 		return (
@@ -89,9 +101,7 @@ class Message extends Component {
 							<CodeMirror value={ this.state.thisWeek } onChange={ this.updateCode.bind(this) } options={ editorOps } />
 						</FormItem>
 						<FormItem label="下周计划">
-							<Popover content={ this.state.popverMsg } title="温馨提示" trigger="focus" >
-								<textarea className="text-area" disabled={ !this.state.onTime }></textarea>
-							</Popover>
+							<CodeMirror value={ this.state.nextWeek } onChange={ this.updateFuture.bind(this) } options={ editorOps } />
 						</FormItem>
 						<FormItem className="text-center">
 							{
