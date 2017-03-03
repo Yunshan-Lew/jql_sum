@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { loginIn, pullLogin, pushToken } from '../../actions/actionLogin';
 import { test } from '../../actions/actionTest';
-import { Form, Icon, Input, Button, Layout } from 'antd';
-// import reqwest from 'reqwest';
+import { Form, Icon, Input, Button, Layout, message } from 'antd';
+import reqwest from 'reqwest';
 
 import styles from './Login.css';
 
@@ -43,7 +43,7 @@ class Login extends Component {
 	}
 	
 	checkPass(){
-		if(this.state.password.length < 6){
+		if(this.state.password.length < 1){
 			this.setState({ 
 				passError: 'error', 
 				passMsg: '请正确填写密码' 
@@ -69,9 +69,23 @@ class Login extends Component {
 	
 	entry(){
 		if( this.checkUser.bind(this)() && this.checkPass.bind(this)() ){
-			this.props.loginIn() // 方式 - redux下引用actions
-			this.props.pushToken('5e92504428e3cecc0fbc8')
-			browserHistory.push({ pathname: '/user/totallist' })
+			reqwest({
+				url: 'http://localhost:3337/login',
+				method: 'post',
+				data: { "user": this.state.user, "password": this.state.password },
+				type: 'json'
+			}).then((res) => {
+				if(res.code === "1"){
+					this.props.loginIn() // 方式 - redux下引用actions
+					this.props.pushToken(res.token)
+					browserHistory.push({ pathname: '/user/totallist' })
+				}
+				else{
+					message.warning(res.message, 2)
+				}
+			}, (err, msg) => {
+				message.warning('登录失败，请重试')
+			})
 		}
 	}
 	
@@ -105,20 +119,7 @@ class Login extends Component {
 		
 	componentDidMount(){
 		this.setState({ minH: ( document.documentElement.clientHeight ) + 'px' })
-		/*reqwest({
-			url: '/',
-			method: 'post',
-			data: { "fuck": "you" },
-			type: 'json'
-		}).then((res) => {
-			console.log('request succeed')
-		}, (err, msg) => {
-			console.log('request falied')
-		})*/
 		this.props.test('试验-1已启动')
-	}
-	
-	componentDidUpdate(){
 		if(this.props.loginStatus)browserHistory.push({ pathname: '/user/totallist' })
 	}
 			

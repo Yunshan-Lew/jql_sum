@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import { Breadcrumb, Form, Button, Modal } from 'antd';
+import { connect } from 'react-redux';
+import { Breadcrumb, Form, Button, Modal, message } from 'antd';
 import CodeMirror from 'react-codemirror';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
+import reqwest from 'reqwest';
 
 const FormItem = Form.Item
 const Confirm = Modal.confirm
@@ -56,8 +58,33 @@ class Message extends Component {
 			title: '温馨提示',
 			content: '总结提交后不能修改，确认要提交？',
 			onOk(){
-				_self.state.leave = true
-				browserHistory.push({ pathname: '/user' })
+				let t = new Date();
+				let yearStr = String(t.getYear() + 1900)
+				let monStr = t.getMonth() + 1 > 9 ? String(t.getMonth() + 1) : `0${ t.getMonth() + 1 }`
+				let dateStr = t.getDate() > 9 ? String(t.getDate()) : `0${ t.getDate() }`
+				
+				reqwest({
+					url: 'http://localhost:3337/message',
+					method: 'post',
+					data: {
+						"token": _self.props.token, 
+						"thisWeek": _self.state.thisWeek, 
+						"nextWeek": _self.state.nextWeek,
+						"date": `${ yearStr }-${monStr }-${dateStr }`
+					},
+					type: 'json'
+				}).then((resp) => {
+					if(resp.code === "1"){
+						_self.state.leave = true
+						browserHistory.push({ pathname: '/user' })
+					}
+					else{
+						message.warning(resp.message, 2)
+					}
+				}, (err, msg) => {
+					message.warning('总结提交失败，请重试')
+				})
+					
 			}
 		})
 	}
@@ -124,7 +151,7 @@ class Message extends Component {
 	
 	componentDidMount(){
 		this.props.catchCurrent('2')
-		if(new Date().getDay() !== 5){
+		if(new Date().getDay() !== 4){
 			// 设为无效
 			this.notOnTime()
 			this.setState({ onTime: false })
@@ -136,4 +163,9 @@ class Message extends Component {
 	}
 }
 
-export default Message
+// lead stores in
+const mapStateToProps = state => ({
+	token: state.todos.token
+})
+
+export default connect(mapStateToProps)(Message)

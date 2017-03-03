@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Table, Breadcrumb } from 'antd';
+import reqwest from 'reqwest';
 // import './Totallist.css';
 
 const columns = [{
 	title: '总结期数',
-	dataIndex: 'sum_index',
-	key: 'sum_index'
+	dataIndex: 'totalIndex',
+	key: 'totalIndex'
 }, {
 	title: '汇总日期',
-	dataIndex: 'sum_date',
-	key: 'sum_date'
+	dataIndex: 'date',
+	key: 'date'
 }, {
 	title: '操作',
-	dataIndex: 'action',
-	key: 'action',
+	dataIndex: 'dateNumber',
+	key: 'dateNumber',
 	render: (text, record) => (
-		<Link to={ "/user/inside/" + record.inside_date }>查看详情</Link>
+		<Link to={ "/user/inside/" + record.dateNumber }>查看详情</Link>
 	)
 }]
 
@@ -25,23 +26,64 @@ class TotalList extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			data: [{
+			data: [/*{
+				key: 0,
+				totalIndex: '1970年1月第3期总结汇总',
+				date: '1970-01-15',
+				dateNumber: '19700115'
+			}, {
 				key: 1,
-				sum_index: '1970年1月第3期总结汇总',
-				sum_date: '1970-01-15',
-				inside_date: '19700115'
+				totalIndex: '1970年1月第2期总结汇总',
+				date: '1970-01-08',
+				dateNumber: '19700108'
 			}, {
 				key: 2,
-				sum_index: '1970年1月第2期总结汇总',
-				sum_date: '1970-01-08',
-				inside_date: '19700108'
-			}, {
-				key: 3,
-				sum_index: '1970年1月第1期总结汇总',
-				sum_date: '1970-01-01',
-				inside_date: '19700101'
-			}]
+				totalIndex: '1970年1月第1期总结汇总',
+				date: '1970-01-01',
+				dateNumber: '19700101'
+			}*/],
+			
+			pagination: {
+				current: 1,
+				pageSize: 10
+			},
+			
+			loading: false
 		}
+	}
+	
+	handleTableChange(pagination, filters, sorter){
+		const pager = this.state.pagination
+		pager.current = pagination.current
+		
+		this.setState({
+			pagination: pager,
+		})
+		
+		this.pullData({
+			page: pagination.current,
+		})
+	}
+	
+	pullData(params = {}){
+		this.setState({ loading: true });
+		
+		reqwest({
+			url: 'http://localhost:3337/totallist',
+			method: 'post',
+			data: {
+				...params
+			},
+			type: 'json'
+		}).then((data) => {
+			const pagination = this.state.pagination
+			pagination.total = data.total
+			this.setState({
+				loading: false,
+				data: data.results,
+				pagination
+			})
+		})
 	}
 	
 	render() {
@@ -53,7 +95,7 @@ class TotalList extends Component {
 					</Breadcrumb>
 				</div>
 				<div className="cnt-inner">
-					<Table className="table-fixed" columns={ columns } dataSource={ this.state.data } />
+					<Table className="table-fixed" columns={ columns } dataSource={ this.state.data } pagination={ this.state.pagination } onChange={ this.handleTableChange } loading={ this.state.loading } />
 				</div>
 			</div>
 		)
@@ -61,6 +103,7 @@ class TotalList extends Component {
 	
 	componentDidMount(){
 		this.props.catchCurrent('1')
+		this.pullData({ page: 1 })
 	}
 }
 

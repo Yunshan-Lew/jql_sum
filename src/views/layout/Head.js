@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-
 import { Button, Dropdown, Layout, Menu, Icon } from 'antd';
 import { loginOut } from '../../actions/actionLogin';
+import reqwest from 'reqwest';
+
 const { Header } = Layout;
 
 class Head extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			
+			username: "用户名"
 		}
 	}
 	
@@ -44,7 +45,7 @@ class Head extends Component {
 					<Dropdown overlay={ menu }>
 						<Button>
 							<Icon type="user" />
-							用户名
+								{ this.state.username }
 							<Icon type="down" />
 						</Button>
 					</Dropdown>
@@ -52,10 +53,35 @@ class Head extends Component {
 			</Header>
 		)
 	}
+	
+	componentDidMount(){
+		let _self = this
+		
+		reqwest({
+			url: 'http://localhost:3337/username',
+			method: 'post',
+			data: { "token": _self.props.token },
+			type: 'json'
+		}).then((res) => {
+			if(res.code === "1"){
+				_self.setState({ username: res.username })
+			}
+			else{
+				console.log(res.message)
+			}
+		}, (err, msg) => {
+			console.log("请求失败，请重试")
+		})
+	}
 }
 
 Head.propTypes = {
 	routerPush: PropTypes.func.isRequired
 }
 
-export default connect()(Head);
+// lead stores in
+const mapStateToProps = state => ({
+	token: state.todos.token
+})
+
+export default connect(mapStateToProps)(Head);

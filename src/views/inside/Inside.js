@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Table, Breadcrumb } from 'antd';
-
+import reqwest from 'reqwest';
 // import styles from './Inside.css';
 
 const columns = [{
 	title: '总结人',
-	dataIndex: 'sum_person',
-	key: 'sum_person'
+	dataIndex: 'username',
+	key: 'username'
 }, {
 	title: '职务',
 	dataIndex: 'job',
 	key: 'job'
 }, {
 	title: '总结日期',
-	dataIndex: 'sum_date',
-	key: 'sum_date'
+	dataIndex: 'date',
+	key: 'date'
 }, {
 	title: '操作',
-	dataIndex: 'action',
-	key: 'action',
+	dataIndex: 'dateNumber',
+	key: 'dateNumber',
 	render: (text, record) => (
-		<Link to={ "/user/summary/" + record.summary_date }>查看详情</Link>
+		<Link to={ `/user/summary/${ record.dateNumber }?_id=${ record._id }` }>查看详情</Link>
 	)
 }];
 
@@ -29,26 +29,56 @@ class Inside extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			data: [{
-				key: 1,
-				sum_person: 'Alice',
+			data: [/*{
+				key: 0,
+				username: 'Alice',
 				job: '洗碗工',
-				sum_date: '1970-01-15',
-				summary_date: "19700115"
-			}, {
-				key: 2,
-				sum_person: 'Bob',
-				job: '扫地工',
-				sum_date: '1970-01-15',
-				summary_date: "19700115"
-			}, {
-				key: 3,
-				sum_person: 'Clinton',
-				job: '搬砖工',
-				sum_date: '1970-01-15',
-				summary_date: "19700115"
-			}]
+				date: '1970-01-15',
+				dateNumber: "19700115"
+			}*/],
+			
+			pagination: {
+				current: 1,
+				pageSize: 10
+			},
+			
+			loading: false
 		}
+	}
+	
+	handleTableChange(pagination, filters, sorter){
+		const pager = this.state.pagination
+		pager.current = pagination.current
+		
+		this.setState({
+			pagination: pager,
+		})
+		
+		this.pullData({
+			page: pagination.current,
+			dateNumber: this.props.params.date
+		})
+	}
+	
+	pullData(params = {}){
+		this.setState({ loading: true });
+		
+		reqwest({
+			url: 'http://localhost:3337/inside',
+			method: 'post',
+			data: {
+				...params
+			},
+			type: 'json'
+		}).then((data) => {
+			const pagination = this.state.pagination
+			pagination.total = data.total
+			this.setState({
+				loading: false,
+				data: data.results,
+				pagination
+			})
+		})
 	}
 	
 	componentWillMount(){
@@ -69,7 +99,7 @@ class Inside extends Component {
 					</Breadcrumb>
 				</div>
 				<div className="cnt-inner">
-					<Table className="table-fixed" columns={ columns } dataSource={ this.state.data } />
+					<Table className="table-fixed" columns={ columns } dataSource={ this.state.data } pagination={ this.state.pagination } onChange={ this.handleTableChange } loading={ this.state.loading } />
 				</div>
 			</div>
 		)
@@ -77,10 +107,10 @@ class Inside extends Component {
 	
 	componentDidMount(){
 		this.props.catchCurrent('1')
-	}
-	
-	componentWillUnmount(){
-		
+		this.pullData({ 
+			page: 1,
+			dateNumber: this.props.params.date
+		})
 	}
 }
 

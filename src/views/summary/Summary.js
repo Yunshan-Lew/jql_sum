@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { Breadcrumb, Button, Card, Col, Row } from 'antd';
+import { Link, browserHistory } from 'react-router';
+import { Breadcrumb, Button, Card, Col, Row, message } from 'antd';
+import reqwest from 'reqwest';
 
 class Summary extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { 
-			
+		this.state = {
+			username: '',
+			thisWeek: '',
+			nextWeek: ''
 		}
 	}
 	
@@ -29,15 +32,13 @@ class Summary extends Component {
 				<div className="cnt-inner">
 					<Row gutter={ 40 }>
 						<Col span="12">
-							<Card title="Alice的本周总结">
-								本周已完成内容1。。。<br/>
-								本周已完成内容2。。。
+							<Card title={ `${ this.state.username }的本周总结` }>
+								<p dangerouslySetInnerHTML={{ __html: this.state.thisWeek }}></p>
 							</Card>
 						</Col>
 						<Col span="12">
-							<Card title="Alice的下周计划">
-								下周要完成内容1。。。<br/>
-								下周要完成内容2。。。
+							<Card title={ `${ this.state.username }的下周计划` }>
+								<p dangerouslySetInnerHTML={{ __html: this.state.nextWeek }}></p>
 							</Card>
 						</Col>
 					</Row>
@@ -54,7 +55,34 @@ class Summary extends Component {
 	}
 	
 	componentDidMount(){
+		let _self = this
 		this.props.catchCurrent('1')
+		
+		reqwest({
+			url: "http://localhost:3337/detail",
+			method: 'post',
+			data: {
+				"dateNumber": this.props.params.date,
+				"_id": this.props.location.query._id
+			},
+			type: 'json'
+		}).then((data) => {
+			if(data.code === "1"){
+				_self.setState({
+					username: data.username,
+					thisWeek: data.thisWeek.replace(/\n/g, '<br/>'),
+					nextWeek: data.nextWeek.replace(/\n/g, '<br/>')
+				})
+			}
+			else{
+				message.warning(data.message, 2, () => {
+					browserHistory.go(-1)
+				})
+			}
+		}, (err, msg) => {
+			message.warning('获取详情失败，请重试', 2)
+		})
+		
 	}
 }
 

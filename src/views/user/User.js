@@ -65,14 +65,11 @@ class User extends Component {
 	}
 	
 	componentDidMount(){
-		this.setState({ minH: ( document.documentElement.clientHeight - 180 ) + 'px' })
-	}
-	
-	componentDidUpdate(){
 		if(!this.props.loginStatus){
 			browserHistory.push({ pathname: '/login' })
 		}
 		else {
+			this.setState({ minH: ( document.documentElement.clientHeight - 180 ) + 'px' })
 			console.log(`${ this.props.testMsg }, the token is ${ this.props.token }`)
 		}
 	}
