@@ -7,21 +7,21 @@ import reqwest from 'reqwest';
 const columns = [{
 	title: '总结人',
 	dataIndex: 'username',
-	key: 'username'
+	key: '0'
 }, {
 	title: '职务',
 	dataIndex: 'job',
-	key: 'job'
+	key: '1'
 }, {
 	title: '总结日期',
 	dataIndex: 'date',
-	key: 'date'
+	key: '2'
 }, {
 	title: '操作',
-	dataIndex: 'dateNumber',
-	key: 'dateNumber',
+	dataIndex: 'date',
+	key: '3',
 	render: (text, record) => (
-		<Link to={ `/user/summary/${ record.dateNumber }?_id=${ record._id }` }>查看详情</Link>
+		<Link to={ `/user/summary/${ record.date.replace(/\D/g, '') }?_id=${ record._id }` }>查看详情</Link>
 	)
 }];
 

@@ -151,7 +151,7 @@ class Message extends Component {
 	
 	componentDidMount(){
 		this.props.catchCurrent('2')
-		if(new Date().getDay() !== 4){
+		if(new Date().getDay() !== 5){
 			// 设为无效
 			this.notOnTime()
 			this.setState({ onTime: false })

@@ -7,17 +7,17 @@ import reqwest from 'reqwest';
 const columns = [{
 	title: '总结期数',
 	dataIndex: 'totalIndex',
-	key: 'totalIndex'
+	key: '0'
 }, {
 	title: '汇总日期',
 	dataIndex: 'date',
-	key: 'date'
+	key: '1'
 }, {
 	title: '操作',
-	dataIndex: 'dateNumber',
-	key: 'dateNumber',
+	dataIndex: 'date',
+	key: '2',
 	render: (text, record) => (
-		<Link to={ "/user/inside/" + record.dateNumber }>查看详情</Link>
+		<Link to={ `/user/inside/${ record.date.replace(/\D/g, '') }` }>查看详情</Link>
 	)
 }]
 
@@ -29,18 +29,15 @@ class TotalList extends Component {
 			data: [/*{
 				key: 0,
 				totalIndex: '1970年1月第3期总结汇总',
-				date: '1970-01-15',
-				dateNumber: '19700115'
+				date: '1970-01-15'
 			}, {
 				key: 1,
 				totalIndex: '1970年1月第2期总结汇总',
-				date: '1970-01-08',
-				dateNumber: '19700108'
+				date: '1970-01-08'
 			}, {
 				key: 2,
 				totalIndex: '1970年1月第1期总结汇总',
-				date: '1970-01-01',
-				dateNumber: '19700101'
+				date: '1970-01-01'
 			}*/],
 			
 			pagination: {
