@@ -120,7 +120,6 @@ class Login extends Component {
 	componentDidMount(){
 		this.setState({ minH: ( document.documentElement.clientHeight ) + 'px' })
 		this.props.test('试验-1已启动')
-		if(this.props.loginStatus)browserHistory.push({ pathname: '/user/totallist' })
 	}
 			
 }

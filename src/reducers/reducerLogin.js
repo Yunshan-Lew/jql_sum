@@ -1,6 +1,6 @@
 const loginInfo = {
 	token: '',
-	loginStatus: null
+	loginStatus: false
 }
 
 const todos = (state = loginInfo, action) => {

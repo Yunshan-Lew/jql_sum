@@ -14,6 +14,9 @@ import Inside from './views/inside/Inside';
 import Message from './views/message/Message';
 import Summary from './views/summary/Summary';
 
+import outRouteHook from './utils/outRouteHook';
+import logRouteHook from './utils/logRouteHook';
+
 import './index.css';
 
 const store = createStore(reducer)
@@ -45,10 +48,10 @@ const App = React.createClass({
 });
 
 ReactDOM.render(
-	<Router history={ browserHistory }>
-		<Route path="/" component={ App } >
-			<Route path="login" component={ Login } />
-			<Route path="user" component={ User } > 
+	<Router history={ browserHistory } >
+		<Route path="/" component={ App }  >
+			<Route path="login" component={ Login } onEnter={ outRouteHook } />
+			<Route path="user" component={ User } onEnter={ logRouteHook } > 
 				<IndexRoute component={ TotalList } />
 				<Route path="totallist" component={ TotalList } />
 				<Route path="inside/:date" component={ Inside } />

@@ -65,13 +65,9 @@ class User extends Component {
 	}
 	
 	componentDidMount(){
-		if(!this.props.loginStatus){
-			browserHistory.push({ pathname: '/login' })
-		}
-		else {
-			this.setState({ minH: ( document.documentElement.clientHeight - 180 ) + 'px' })
-			console.log(`${ this.props.testMsg }, the token is ${ this.props.token }`)
-		}
+		this.setState({ minH: ( document.documentElement.clientHeight - 180 ) + 'px' })
+		// 因为mapDispatchToProps的动作延迟，所以token打印为空，但会在稍后的componentDidUpdate中更新
+		console.log(`${ this.props.testMsg }, the token is ${ this.props.token }`)
 	}
 	
 }
