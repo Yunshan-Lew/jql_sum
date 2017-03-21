@@ -33,8 +33,7 @@ class Inside extends Component {
 				key: 0,
 				username: 'Alice',
 				job: '洗碗工',
-				date: '1970-01-15',
-				dateNumber: "19700115"
+				date: '1970-01-15'
 			}*/],
 			
 			pagination: {
