@@ -32,6 +32,8 @@ body{
 .sum-form{margin:0 30px;}
 .sum-form label{font-size:14px;font-weight:700;}
 .CodeMirror{max-width:885px;height:333px;font-size:18px;}
+.btn-sum{margin:0 20px;}
+.short .CodeMirror{height:240px;}
 
 /* Based on Sublime Text's Monokai theme */
 .cm-s-monokai.CodeMirror { background: #272822; color: #f8f8f2; }
