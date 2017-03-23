@@ -17,9 +17,8 @@ class Message extends Component {
 			loading: false,
 			leave: false,
 			onTime: true,
-			popverMsg: '换行不要忘了打句号哦',
-			thisWeek: 'const Hello = () => "Here we go!"',
-			nextWeek: 'const Hello = () => "Let us plan!"'
+			thisWeek: 'const Start = ( ) => "Let\'s write a summary!"',
+			nextWeek: 'const Start = ( ) => "Let\'s write a plan!"'
 		}
 	}
 	
@@ -56,7 +55,7 @@ class Message extends Component {
 		let _self = this
 		Confirm({
 			title: '温馨提示',
-			content: '总结提交后不能修改，确认要提交？',
+			content: '总结提交后可在详情页中修改，确认要提交？',
 			onOk(){
 				let t = new Date();
 				let yearStr = String(t.getYear() + 1900)
