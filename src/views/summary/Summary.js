@@ -23,6 +23,35 @@ class Summary extends Component {
 		}
 	}
 	
+	readDetail(){
+		let _self = this
+		
+		reqwest({
+			url: "http://localhost:3337/detail",
+			method: 'post',
+			data: {
+				"dateNumber": _self.props.params.date,
+				"_id": _self.props.location.query._id
+			},
+			type: 'json'
+		}).then((data) => {
+			if(data.code === "1"){
+				_self.setState({
+					username: data.username,
+					thisWeek: data.thisWeek,
+					nextWeek: data.nextWeek
+				})
+			}
+			else{
+				message.warning(data.message, 2, () => {
+					browserHistory.go(-1)
+				})
+			}
+		}, (err, msg) => {
+			message.warning('获取详情失败，请重试', 2)
+		})
+	}
+	
 	subChange(){
 		let _self = this
 		let d = _self.props.params.date
@@ -133,11 +162,12 @@ class Summary extends Component {
 						}
 					</div>
 				</div>
-				<Modal title="修改总结" width={ 800 } visible={ this.state.modalV } onOk={ this.subChange.bind(this) } onCancel={ 
+				<Modal title="修改总结" width={ 800 } visible={ this.state.modalV } maskClosable={ false } onOk={ this.subChange.bind(this) } onCancel={ 
 					() => {
+						this.readDetail()
 						this.setState({
 							modalV: false
-						}) 
+						})
 					}
 				} >
 					<Form className="sum-form short">
@@ -155,32 +185,9 @@ class Summary extends Component {
 	
 	componentDidMount(){
 		let _self = this
-		this.props.catchCurrent('1')
+		_self.props.catchCurrent('1')
 		
-		reqwest({
-			url: "http://localhost:3337/detail",
-			method: 'post',
-			data: {
-				"dateNumber": this.props.params.date,
-				"_id": this.props.location.query._id
-			},
-			type: 'json'
-		}).then((data) => {
-			if(data.code === "1"){
-				_self.setState({
-					username: data.username,
-					thisWeek: data.thisWeek,
-					nextWeek: data.nextWeek
-				})
-			}
-			else{
-				message.warning(data.message, 2, () => {
-					browserHistory.go(-1)
-				})
-			}
-		}, (err, msg) => {
-			message.warning('获取详情失败，请重试', 2)
-		})
+		_self.readDetail()
 		
 		reqwest({
 			url: 'http://localhost:3337/username',
@@ -197,7 +204,6 @@ class Summary extends Component {
 		}, (err, msg) => {
 			console.log("请求失败，请重试")
 		})
-		
 	}
 }
 
