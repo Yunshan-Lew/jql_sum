@@ -49,20 +49,18 @@ class TotalList extends Component {
 		}
 	}
 	
-	handleTableChange(pagination, filters, sorter){
+	handleTableChange(pageC, filters, sorter){
 		const pager = this.state.pagination
-		pager.current = pagination.current
+		pager.current = pageC.current
 		
 		this.setState({
 			pagination: pager,
 		})
 		
-		this.pullData({
-			page: pagination.current,
-		})
+		this.pullData()
 	}
 	
-	pullData(params = {}){
+	pullData( params = this.state.pagination ){
 		this.setState({ loading: true });
 		
 		reqwest({
@@ -92,7 +90,7 @@ class TotalList extends Component {
 					</Breadcrumb>
 				</div>
 				<div className="cnt-inner">
-					<Table className="table-fixed" columns={ columns } dataSource={ this.state.data } pagination={ this.state.pagination } onChange={ this.handleTableChange } loading={ this.state.loading } />
+					<Table className="table-fixed" columns={ columns } dataSource={ this.state.data } pagination={ this.state.pagination } onChange={ this.handleTableChange.bind(this) } loading={ this.state.loading } />
 				</div>
 			</div>
 		)
@@ -100,7 +98,7 @@ class TotalList extends Component {
 	
 	componentDidMount(){
 		this.props.catchCurrent('1')
-		this.pullData({ page: 1 })
+		this.pullData()
 	}
 }
 

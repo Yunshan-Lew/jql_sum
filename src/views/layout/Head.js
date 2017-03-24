@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Button, Dropdown, Layout, Menu, Icon } from 'antd';
 import { loginOut } from '../../actions/actionLogin';
+import { getUser } from '../../actions/actionUser';
 import reqwest from 'reqwest';
 
 const { Header } = Layout;
@@ -65,6 +66,8 @@ class Head extends Component {
 		}).then((res) => {
 			if(res.code === "1"){
 				_self.setState({ username: res.username })
+				let { dispatch } = this.props
+				dispatch( getUser(res.username) )
 			}
 			else{
 				console.log(res.message)

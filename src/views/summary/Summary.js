@@ -13,8 +13,6 @@ class Summary extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			the_user: '',
-			
 			username: '',
 			thisWeek: '',
 			nextWeek: '',
@@ -146,7 +144,7 @@ class Summary extends Component {
 							</Button>
 						</Link>
 						{
-							this.state.username === this.state.the_user ?
+							this.state.username === this.props.username ?
 							(
 								<Button size="large" icon="edit" className="btn-sum" onClick={
 									() => {
@@ -186,30 +184,14 @@ class Summary extends Component {
 	componentDidMount(){
 		let _self = this
 		_self.props.catchCurrent('1')
-		
 		_self.readDetail()
-		
-		reqwest({
-			url: 'http://localhost:3337/username',
-			method: 'post',
-			data: { "token": _self.props.token },
-			type: 'json'
-		}).then((res) => {
-			if(res.code === "1"){
-				_self.setState({ the_user: res.username })
-			}
-			else{
-				console.log(res.message)
-			}
-		}, (err, msg) => {
-			console.log("请求失败，请重试")
-		})
 	}
 }
 
 // lead stores in
 const mapStateToProps = state => ({
-	token: state.todos.token
+	token: state.todos.token,
+	username: state.userTodos.username
 })
 
 export default connect(mapStateToProps)(Summary);
