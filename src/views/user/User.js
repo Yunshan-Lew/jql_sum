@@ -49,6 +49,18 @@ class User extends Component {
 									<span className="nav-text font-14">总结提交</span>
 								</Link>
 							</Menu.Item>
+							<Menu.Item key="3" className="menu-high">
+								<Link to="/user/shareshow">
+									<Icon type="like-o" className="font-14" />
+									<span className="nav-text font-14">技术分享</span>
+								</Link>
+							</Menu.Item>
+							<Menu.Item key="4" className="menu-high">
+								<Link to="/user/sharesubmit">
+									<Icon type="share-alt" className="font-14" />
+									<span className="nav-text font-14">发布分享</span>
+								</Link>
+							</Menu.Item>
 						</Menu>
 					</Sider>
 					<Content>

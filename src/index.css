@@ -12,11 +12,13 @@ body{
 ::-webkit-scrollbar-thumb{background-color:#eee;border:1px solid rgba(0, 0, 0, .2);-webkit-border-radius:5px;}
 .bg-gray{background:#ececec;}
 .bg-fff{background:#fff;}
+.color-blue{color:#49a9ee;}
 .text-center{text-align:center;}
 .font-14{font-size:14px;}
 .pull-left{float:left;}
 .pull-right{float:right;}
 .mart-30{margin-top:30px;}
+.marb-30{margin-bottom:30px;}
 .mart-60{margin-top:60px;}
 
 .jql-head{background:#fff;height:90px;border-bottom:1px solid #ddd;}
@@ -34,6 +36,7 @@ body{
 .CodeMirror{max-width:885px;height:333px;font-size:18px;}
 .btn-sum{margin:0 20px;}
 .short .CodeMirror{height:240px;}
+.tall .CodeMirror{height:500px;}
 
 /* Based on Sublime Text's Monokai theme */
 .cm-s-monokai.CodeMirror { background: #272822; color: #f8f8f2; }

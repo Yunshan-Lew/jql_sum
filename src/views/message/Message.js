@@ -62,6 +62,8 @@ class Message extends Component {
 				let monStr = t.getMonth() + 1 > 9 ? String(t.getMonth() + 1) : `0${ t.getMonth() + 1 }`
 				let dateStr = t.getDate() > 9 ? String(t.getDate()) : `0${ t.getDate() }`
 				
+				_self.setState({ loading: true })
+				
 				reqwest({
 					url: 'http://localhost:3337/message',
 					method: 'post',
@@ -73,6 +75,8 @@ class Message extends Component {
 					},
 					type: 'json'
 				}).then((resp) => {
+					_self.setState({ loading: false })
+					
 					if(resp.code === "1"){
 						_self.state.leave = true
 						browserHistory.push({ pathname: '/user' })
@@ -81,6 +85,7 @@ class Message extends Component {
 						message.warning(resp.message, 2)
 					}
 				}, (err, msg) => {
+					_self.setState({ loading: false })
 					message.warning('总结提交失败，请重试')
 				})
 					
