@@ -32,9 +32,8 @@ class Message extends Component {
 					_self.state.leave = true
 					browserHistory.push(nextLocation)
 				},
-				onCancel(){
-					void(0)
-				}
+				okText: '离开',
+				cancelText: '留下'
 			})
 		}
 		return this.state.leave
