@@ -13,7 +13,9 @@ body{
 .bg-gray{background:#ececec;}
 .bg-fff{background:#fff;}
 .color-blue{color:#49a9ee;}
+.color-gray{color:#ddd;}
 .text-center{text-align:center;}
+.text-right{text-align:right;}
 .font-14{font-size:14px;}
 .pull-left{float:left;}
 .pull-right{float:right;}
@@ -37,6 +39,13 @@ body{
 .btn-sum{margin:0 20px;}
 .short .CodeMirror{height:240px;}
 .tall .CodeMirror{height:500px;}
+.icon-right{margin-right:5px;}
+.share-h{height:295px;}
+.show-all{width:100%;padding:10px 0;position:absolute;left:0;bottom:0;cursor:pointer;}
+.card-padbt{border:1px solid #ddd;}
+.card-padbt > .ant-card-body{padding-bottom:40px;}
+.like-box{border:1px solid #ddd;margin:4px 0 40px;padding:10px 15px;border-radius:4px;}
+.like-it{padding:0 4px;font-size:18px;}
 
 /* Based on Sublime Text's Monokai theme */
 .cm-s-monokai.CodeMirror { background: #272822; color: #f8f8f2; }
