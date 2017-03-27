@@ -29,6 +29,60 @@ class Shareshow extends Component {
 		}
 	}
 	
+	likeSwift(share_id, side, index){
+		let _self = this
+		
+		reqwest({
+			url: 'http://localhost:3337/like',
+			method: 'post',
+			data: {
+				"token": _self.props.token,
+				"share_id": share_id
+			},
+			type: 'json'
+		}).then((resp) => {
+			if(resp.code === "1"){
+				if(side === 'l' && resp.message === "like succeed"){
+					let leftC = _self.state.leftSide
+					leftC[index].like += 1
+					leftC[index].isFans = true
+					_self.setState({
+						leftSide: leftC
+					});
+				}
+				else if(side === 'l' && resp.message === "dislike succeed"){
+					let leftC = _self.state.leftSide
+					leftC[index].like -= 1
+					leftC[index].isFans = false
+					_self.setState({
+						leftSide: leftC
+					});
+				}
+				else if(side === 'r' && resp.message === "like succeed"){
+					let rightC = _self.state.rightSide
+					rightC[index].like += 1
+					rightC[index].isFans = true
+					_self.setState({
+						rightSide: rightC
+					});
+				}
+				else if(side === 'r' && resp.message === "dislike succeed"){
+					let rightC = _self.state.rightSide
+					rightC[index].like -= 1
+					rightC[index].isFans = false
+					_self.setState({
+						rightSide: rightC
+					});
+				}
+			}
+			else{
+				message.warning(resp.message, 2)
+			}
+		}, (err, msg) => {
+			message.warning('获取分享失败，请重试')
+		})
+	}
+	
 	pullShare(){
 		let _self = this
 		
@@ -36,7 +90,7 @@ class Shareshow extends Component {
 			url: 'http://localhost:3337/techshare',
 			method: 'post',
 			data: {
-				
+				token: _self.props.token
 			},
 			type: 'json'
 		}).then((resp) => {
@@ -113,10 +167,10 @@ class Shareshow extends Component {
 										</Card>
 										<div className="like-box text-right">
 											喜欢？赞一个
-											<a className="like-it">
-												<Icon type="like-o" />
+											<a className="like-it" onClick={ this.likeSwift.bind(this, item._id, 'l', index) } >
+												{ item.isFans ? <Icon type="like" /> : <Icon type="like-o" /> }
 											</a>
-											<span className="color-blue">0</span>
+											<span className="color-blue">{ item.like }</span>
 										</div>
 									</div>
 								) )
@@ -151,10 +205,10 @@ class Shareshow extends Component {
 										</Card>
 										<div className="like-box text-right">
 											喜欢？赞一个
-											<a className="like-it">
-												<Icon type="like-o" />
+											<a className="like-it" onClick={ this.likeSwift.bind(this, item._id, 'r', index) } >
+												{ item.isFans ? <Icon type="like" /> : <Icon type="like-o" /> }
 											</a>
-											<span className="color-blue">0</span>
+											<span className="color-blue">{ item.like }</span>
 										</div>
 									</div>
 								) )

@@ -40,7 +40,7 @@ body{
 .short .CodeMirror{height:240px;}
 .tall .CodeMirror{height:500px;}
 .icon-right{margin-right:5px;}
-.share-h{height:295px;}
+.share-h{height:205px;}
 .show-all{width:100%;padding:10px 0;position:absolute;left:0;bottom:0;cursor:pointer;}
 .card-padbt{border:1px solid #ddd;}
 .card-padbt > .ant-card-body{padding-bottom:40px;}

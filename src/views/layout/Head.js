@@ -31,6 +31,11 @@ class Head extends Component {
 					</Link>
 				</Menu.Item>
 				<Menu.Item key="2">
+					<Link to="/user/sharesubmit">
+						<Icon type="share-alt" /> 发布分享
+					</Link>
+				</Menu.Item>
+				<Menu.Item key="3">
 					<a onClick={ this.exit.bind(this) }>
 						<Icon type="logout" /> 退出
 					</a>
