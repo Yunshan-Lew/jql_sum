@@ -16,6 +16,7 @@ class Login extends Component {
 		super(props)
 		this.state = {
 			minH: 'auto',
+			margT: 0,
 			user: '',
 			userError: '',
 			userMsg: '',
@@ -95,21 +96,22 @@ class Login extends Component {
 	
 	render(){
 		return (
-			<Layout className={ styles['login-bg'] } style={{ minHeight: this.state.minH }}>
-				<div className={ styles['login-logo'] }></div>
-				<Form className={ styles['login-form'] }>
-					<FormItem validateStatus={ this.state.userError } help={ this.state.userMsg }>
-						<Input addonBefore={<Icon type="user" />} placeholder="用户名" value={ this.state.user } onChange={ this.userChange.bind(this) } />
-					</FormItem>
-					<FormItem validateStatus={ this.state.passError } help={ this.state.passMsg }>
-						<Input addonBefore={<Icon type="lock" />} type="password" placeholder="登录密码" value={ this.state.password } onChange={ this.passChange.bind(this) } />
-					</FormItem>
-					<FormItem>
-						<Button type="primary" size="large" htmlType="submit" className={ styles['login-button'] } onClick={ this.entry.bind(this) }>
-							登录
-						</Button>
-					</FormItem>
-				</Form>
+			<Layout className={ styles['login-bg'] } style={ { minHeight: this.state.minH } }>
+				<div className={ styles['login-box'] } style={ { marginTop: this.state.margT } }>
+					<Form className={ styles['login-form'] }>
+						<FormItem validateStatus={ this.state.userError } help={ this.state.userMsg }>
+							<Input addonBefore={<Icon type="user" />} placeholder="用户名" value={ this.state.user } onChange={ this.userChange.bind(this) } />
+						</FormItem>
+						<FormItem validateStatus={ this.state.passError } help={ this.state.passMsg }>
+							<Input addonBefore={<Icon type="lock" />} type="password" placeholder="登录密码" value={ this.state.password } onChange={ this.passChange.bind(this) } />
+						</FormItem>
+						<FormItem>
+							<Button type="primary" size="large" htmlType="submit" className={ styles['login-button'] } onClick={ this.entry.bind(this) }>
+								登录
+							</Button>
+						</FormItem>
+					</Form>
+				</div>
 				<p className={ 'font-14 text-center ' + styles['login-bt'] }>
 					&copy;2014-2017 JQL.CN Technolegy Department
 				</p>
@@ -118,7 +120,11 @@ class Login extends Component {
 	}
 		
 	componentDidMount(){
-		this.setState({ minH: ( document.documentElement.clientHeight ) + 'px' })
+		let H = document.documentElement.clientHeight
+		this.setState({ 
+			minH: `${ H }px`, 
+			margT: `${ ( H - 360 ) / 2.2 }px`
+		})
 		this.props.test('试验-1已启动')
 	}
 			
