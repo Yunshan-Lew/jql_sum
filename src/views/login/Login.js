@@ -100,10 +100,10 @@ class Login extends Component {
 				<div className={ styles['login-box'] } style={ { marginTop: this.state.margT } }>
 					<Form className={ styles['login-form'] }>
 						<FormItem validateStatus={ this.state.userError } help={ this.state.userMsg }>
-							<Input addonBefore={<Icon type="user" />} placeholder="用户名" value={ this.state.user } onChange={ this.userChange.bind(this) } />
+							<Input addonBefore={ <Icon type="user" /> } placeholder="用户名" value={ this.state.user } onChange={ this.userChange.bind(this) } />
 						</FormItem>
 						<FormItem validateStatus={ this.state.passError } help={ this.state.passMsg }>
-							<Input addonBefore={<Icon type="lock" />} type="password" placeholder="登录密码" value={ this.state.password } onChange={ this.passChange.bind(this) } />
+							<Input addonBefore={ <Icon type="lock" /> } type="password" placeholder="登录密码" value={ this.state.password } onChange={ this.passChange.bind(this) } />
 						</FormItem>
 						<FormItem>
 							<Button type="primary" size="large" htmlType="submit" className={ styles['login-button'] } onClick={ this.entry.bind(this) }>

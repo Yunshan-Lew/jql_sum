@@ -142,7 +142,7 @@ class Shareshow extends Component {
 							{
 								this.state.leftSide.map( ( item, index ) => (
 									<div key={ index } >
-										<Card className={ `card-padbt ${ !item.showAll ? 'share-h' : '' }` } title={
+										<Card className={ `card-dash ${ !item.showAll ? 'share-h' : '' }` } title={
 											<b>
 												<Icon type="notification" className="icon-right" />
 												{ item.username }
@@ -180,7 +180,7 @@ class Shareshow extends Component {
 							{
 								this.state.rightSide.map( ( item, index ) => (
 									<div key={ index } >
-										<Card className={ `card-padbt ${ !item.showAll ? 'share-h' : '' }` } title={
+										<Card className={ `card-dash ${ !item.showAll ? 'share-h' : '' }` } title={
 											<b>
 												<Icon type="notification" className="icon-right" />
 												{ item.username }

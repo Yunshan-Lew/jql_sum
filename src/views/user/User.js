@@ -61,6 +61,12 @@ class User extends Component {
 									<span className="nav-text font-14">发布分享</span>
 								</Link>
 							</Menu.Item>
+							<Menu.Item key="5" className="menu-high">
+								<Link to="/user/password">
+									<Icon type="setting" className="font-14" />
+									<span className="nav-text font-14">修改密码</span>
+								</Link>
+							</Menu.Item>
 						</Menu>
 					</Sider>
 					<Content>
