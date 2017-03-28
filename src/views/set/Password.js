@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { Form, Input, Breadcrumb, Button, Row, Col, Icon, message } from 'antd';
+import { Form, Input, Breadcrumb, Button, Row, Col, message } from 'antd';
 import reqwest from 'reqwest';
 
 const FormItem = Form.Item
@@ -173,7 +173,6 @@ class Password extends Component {
 							</Row>
 						</FormItem>
 					</Form>
-					<Icon type="safety" />
 				</div>
 			</div>
 		)
