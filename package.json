@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "antd": "^2.8.3",
     "react-codemirror": "^0.3.0",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
@@ -11,7 +12,7 @@
     "reqwest": "^2.0.5"
   },
   "dependencies": {
-    "antd": "^2.7.0",
+    "antd": "^2.8.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },

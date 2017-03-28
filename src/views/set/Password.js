@@ -149,18 +149,18 @@ class Password extends Component {
 				<div className="cnt-inner">
 					<Form className="set-form">
 						<FormItem { ...formItemLayout } label="原始密码" validateStatus={ this.state.oldError } help={ this.state.oldMsg } >
-							<Input type="text" value={ this.state.old } onChange={ this.oldChange.bind(this) } onBlur={ this.checkOld.bind(this) } />
+							<Input type="password" value={ this.state.old } onChange={ this.oldChange.bind(this) } onBlur={ this.checkOld.bind(this) } />
 						</FormItem>
 						<FormItem { ...formItemLayout } label="新的密码" validateStatus={ this.state.NewError } help={ this.state.NewMsg } >
-							<Input type="text" value={ this.state.New } onChange={ this.NewChange.bind(this) } onBlur={ this.checkNew.bind(this) } />
+							<Input type="password" value={ this.state.New } onChange={ this.NewChange.bind(this) } onBlur={ this.checkNew.bind(this) } />
 						</FormItem>
 						<FormItem { ...formItemLayout } label="重复密码" validateStatus={ this.state.repeatError } help={ this.state.repeatMsg } >
-							<Input type="text" value={ this.state.repeat } onChange={ this.repeatChange.bind(this) } onBlur={ this.checkRepeat.bind(this) } />
+							<Input type="password" value={ this.state.repeat } onChange={ this.repeatChange.bind(this) } onBlur={ this.checkRepeat.bind(this) } />
 						</FormItem>
 						<FormItem>
 							<Row>
 								<Col span={ 16 } offset={ 6 } >
-									<Button type="primary" size="large" icon="save" loading={ this.state.loading } onClick={ 
+									<Button type="primary" size="large" icon="key" loading={ this.state.loading } onClick={ 
 										this.sendNew.bind(this, { 
 											old: this.state.old, 
 											New: this.state.New, 
