@@ -64,7 +64,7 @@ class Head extends Component {
 		let _self = this
 		
 		reqwest({
-			url: 'http://localhost:3337/username',
+			url: `${ _self.props.THE_HOST }/username`,
 			method: 'post',
 			data: { "token": _self.props.token },
 			type: 'json'
@@ -89,6 +89,7 @@ Head.propTypes = {
 
 // lead stores in
 const mapStateToProps = state => ({
+	THE_HOST: state.todos.THE_HOST,
 	token: state.todos.token
 })
 

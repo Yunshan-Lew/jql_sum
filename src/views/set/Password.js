@@ -106,7 +106,7 @@ class Password extends Component {
 			this.setState({ loading: true })
 			
 			reqwest({
-				url: 'http://localhost:3337/password',
+				url: `${ this.props.THE_HOST }/password`,
 				method: 'post',
 				data: {
 					...params
@@ -185,6 +185,7 @@ class Password extends Component {
 
 // lead stores in
 const mapStateToProps = state => ({
+	THE_HOST: state.todos.THE_HOST,
 	token: state.todos.token
 })
 

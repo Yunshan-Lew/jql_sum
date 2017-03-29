@@ -46,7 +46,7 @@ class Sharesubmit extends Component {
 				_self.setState({ loading: true })
 				
 				reqwest({
-					url: 'http://localhost:3337/share',
+					url: `${ _self.props.THE_HOST }/share`,
 					method: 'post',
 					data: {
 						"token": _self.props.token, 
@@ -124,6 +124,7 @@ class Sharesubmit extends Component {
 
 // lead stores in
 const mapStateToProps = state => ({
+	THE_HOST: state.todos.THE_HOST,
 	token: state.todos.token
 })
 

@@ -64,7 +64,7 @@ class Message extends Component {
 				_self.setState({ loading: true })
 				
 				reqwest({
-					url: 'http://localhost:3337/message',
+					url: `${ _self.props.THE_HOST }/message`,
 					method: 'post',
 					data: {
 						"token": _self.props.token, 
@@ -168,6 +168,7 @@ class Message extends Component {
 
 // lead stores in
 const mapStateToProps = state => ({
+	THE_HOST: state.todos.THE_HOST,
 	token: state.todos.token
 })
 

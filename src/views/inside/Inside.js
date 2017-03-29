@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import { Table, Breadcrumb } from 'antd';
 import reqwest from 'reqwest';
 // import styles from './Inside.css';
@@ -60,7 +61,7 @@ class Inside extends Component {
 		this.setState({ loading: true });
 		
 		reqwest({
-			url: 'http://localhost:3337/inside',
+			url: `${ this.props.THE_HOST }/inside`,
 			method: 'post',
 			data: {
 				...params
@@ -107,4 +108,9 @@ class Inside extends Component {
 	}
 }
 
-export default Inside
+// lead stores in
+const mapStateToProps = state => ({
+	THE_HOST: state.todos.THE_HOST
+})
+
+export default connect(mapStateToProps)(Inside)

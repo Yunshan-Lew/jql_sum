@@ -33,7 +33,7 @@ class Shareshow extends Component {
 		let _self = this
 		
 		reqwest({
-			url: 'http://localhost:3337/like',
+			url: `${ _self.props.THE_HOST }/like`,
 			method: 'post',
 			data: {
 				"token": _self.props.token,
@@ -87,7 +87,7 @@ class Shareshow extends Component {
 		let _self = this
 		
 		reqwest({
-			url: 'http://localhost:3337/techshare',
+			url: `${ _self.props.THE_HOST }/techshare`,
 			method: 'post',
 			data: {
 				token: _self.props.token
@@ -151,7 +151,7 @@ class Shareshow extends Component {
 											{
 												item.shareText.split('\n').map( ( text, line ) => (
 													<p key={ line } >
-														{ text.replace('\t', '　　') }
+														{ text.replace(/\t/g, '　　') }
 													</p>
 												) ) 
 											}
@@ -228,6 +228,7 @@ class Shareshow extends Component {
 
 // lead stores in
 const mapStateToProps = state => ({
+	THE_HOST: state.todos.THE_HOST,
 	token: state.todos.token
 })
 

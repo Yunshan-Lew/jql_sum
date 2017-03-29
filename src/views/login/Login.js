@@ -71,7 +71,7 @@ class Login extends Component {
 	entry(){
 		if( this.checkUser.bind(this)() && this.checkPass.bind(this)() ){
 			reqwest({
-				url: 'http://localhost:3337/login',
+				url: `${ this.props.THE_HOST }/login`,
 				method: 'post',
 				data: { "user": this.state.user, "password": this.state.password },
 				type: 'json'
@@ -134,6 +134,7 @@ const actions = { loginIn, pullLogin, pushToken, test }
 
 // lead stores in
 const mapStateToProps = state => ({
+	THE_HOST: state.todos.THE_HOST,
 	loginStatus: state.todos.loginStatus,
 	testMsg: state.testTodos.testMsg
 })

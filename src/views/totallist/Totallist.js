@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import { Table, Breadcrumb } from 'antd';
 import reqwest from 'reqwest';
 // import './Totallist.css';
@@ -64,7 +65,7 @@ class TotalList extends Component {
 		this.setState({ loading: true });
 		
 		reqwest({
-			url: 'http://localhost:3337/totallist',
+			url: `${ this.props.THE_HOST }/totallist`,
 			method: 'post',
 			data: {
 				...params
@@ -102,4 +103,9 @@ class TotalList extends Component {
 	}
 }
 
-export default TotalList;
+// lead stores in
+const mapStateToProps = state => ({
+	THE_HOST: state.todos.THE_HOST
+})
+
+export default connect(mapStateToProps)(TotalList);

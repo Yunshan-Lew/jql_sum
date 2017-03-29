@@ -1,4 +1,5 @@
 const loginInfo = {
+	THE_HOST: 'http://localhost:3337',
 	token: '',
 	loginStatus: false
 }

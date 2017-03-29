@@ -25,7 +25,7 @@ class Summary extends Component {
 		let _self = this
 		
 		reqwest({
-			url: "http://localhost:3337/detail",
+			url: `${ _self.props.THE_HOST }/detail`,
 			method: 'post',
 			data: {
 				"dateNumber": _self.props.params.date,
@@ -55,7 +55,7 @@ class Summary extends Component {
 		let d = _self.props.params.date
 		
 		reqwest({
-			url: "http://localhost:3337/edit",
+			url: `${ _self.props.THE_HOST }/edit`,
 			method: 'post',
 			data: {
 				"thisWeek": _self.state.thisWeek,
@@ -190,6 +190,7 @@ class Summary extends Component {
 
 // lead stores in
 const mapStateToProps = state => ({
+	THE_HOST: state.todos.THE_HOST,
 	token: state.todos.token,
 	username: state.userTodos.username
 })
