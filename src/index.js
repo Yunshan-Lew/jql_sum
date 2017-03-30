@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory, IndexRedirect } from 'react-router';
+import { Router, Route, browserHistory, IndexRedirect, Redirect } from 'react-router';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
@@ -48,14 +48,13 @@ const App = React.createClass({
 	componentDidMount(){
 		document.title = 'JQL Technolegy Department'
 	}
-});
+})
 
 ReactDOM.render(
 	<Router history={ browserHistory } >
 		<Route path="/" component={ App }  >
 			<Route path="login" component={ Login } onEnter={ outRouteHook } />
-			<Route path="user" component={ User } onEnter={ logRouteHook } > 
-				<IndexRoute component={ TotalList } />
+			<Route path="user" component={ User } onEnter={ logRouteHook } >
 				<Route path="totallist" component={ TotalList } />
 				<Route path="inside/:date" component={ Inside } />
 				<Route path="summary/:date" component={ Summary } />
@@ -63,11 +62,14 @@ ReactDOM.render(
 				<Route path="sharesubmit" component={ Sharesubmit } />
 				<Route path="shareshow" component={ Shareshow } />
 				<Route path="password" component={ Password } />
-				<Route path="*" component={ TotalList } />
+				<IndexRedirect to="/user/totallist" />
 			</Route>
+			// 匹配空
 			<IndexRedirect to="/user" />
+			// 匹配其它
+			<Redirect from="*" to="/user" />
 		</Route>
 	</Router>
 	,
 	document.getElementById('root')
-);
+)
