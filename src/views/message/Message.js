@@ -73,7 +73,7 @@ class Message extends Component {
 						"date": `${ yearStr }-${monStr }-${dateStr }`
 					},
 					type: 'json'
-				}).then((resp) => {
+				}).then( resp => {
 					_self.setState({ loading: false })
 					
 					if(resp.code === "1"){

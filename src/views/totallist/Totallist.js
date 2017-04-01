@@ -71,7 +71,7 @@ class TotalList extends Component {
 				...params
 			},
 			type: 'json'
-		}).then((data) => {
+		}).then( data => {
 			const pagination = this.state.pagination
 			pagination.total = data.total
 			this.setState({

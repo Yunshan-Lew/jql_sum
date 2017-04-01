@@ -40,7 +40,7 @@ class Shareshow extends Component {
 				"share_id": share_id
 			},
 			type: 'json'
-		}).then((resp) => {
+		}).then( resp => {
 			if(resp.code === "1"){
 				if(side === 'l' && resp.message === "like succeed"){
 					let leftC = _self.state.leftSide
@@ -93,13 +93,13 @@ class Shareshow extends Component {
 				token: _self.props.token
 			},
 			type: 'json'
-		}).then((resp) => {
+		}).then( resp => {
 			if(resp.code === "1"){
-				resp.leftSide.forEach( (item) => {
+				resp.leftSide.forEach( item => {
 					item.showAll = false
 				})
 				
-				resp.rightSide.forEach( (item) => {
+				resp.rightSide.forEach( item => {
 					item.showAll = false
 				})
 				

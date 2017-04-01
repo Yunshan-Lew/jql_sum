@@ -112,7 +112,7 @@ class Password extends Component {
 					...params
 				},
 				type: 'json'
-			}).then( (data) => {
+			}).then( data => {
 				this.setState({ loading: false })
 				if(data.code === "1"){
 					message.success('保存成功', 1.2, () => {

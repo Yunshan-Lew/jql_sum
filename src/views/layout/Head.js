@@ -68,7 +68,7 @@ class Head extends Component {
 			method: 'post',
 			data: { "token": _self.props.token },
 			type: 'json'
-		}).then((res) => {
+		}).then( res => {
 			if(res.code === "1"){
 				_self.setState({ username: res.username })
 				let { dispatch } = this.props

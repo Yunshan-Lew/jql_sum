@@ -75,7 +75,7 @@ class Login extends Component {
 				method: 'post',
 				data: { "user": this.state.user, "password": this.state.password },
 				type: 'json'
-			}).then((res) => {
+			}).then( res => {
 				if(res.code === "1"){
 					this.props.loginIn() // 方式 - redux下引用actions
 					this.props.pushToken(res.token)

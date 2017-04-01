@@ -32,7 +32,7 @@ class Summary extends Component {
 				"_id": _self.props.location.query._id
 			},
 			type: 'json'
-		}).then((data) => {
+		}).then( data => {
 			if(data.code === "1"){
 				_self.setState({
 					username: data.username,
@@ -64,7 +64,7 @@ class Summary extends Component {
 				"date": `${ d.slice(0, 4) }-${ d.slice(4, 6) }-${ d.slice(6) }`
 			},
 			type: 'json'
-		}).then( (res) => {
+		}).then( res => {
 			if(res.code === "1"){
 				message.success('修改成功', 1.2, () => {
 					_self.setState({
