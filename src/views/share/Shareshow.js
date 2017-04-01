@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Breadcrumb, message, Col, Row, Card, Icon } from 'antd';
+import { Breadcrumb, message, Col, Row, Card, Icon, Button } from 'antd';
 import reqwest from 'reqwest';
 
 class Shareshow extends Component {
@@ -8,7 +8,10 @@ class Shareshow extends Component {
 		super(props)
 		this.state = {
 			leftSide: [],
-			rightSide: []
+			rightSide: [],
+			pageSize: 6,
+			target: 1,
+			couldMore: true
 		}
 	}
 	
@@ -90,11 +93,21 @@ class Shareshow extends Component {
 			url: `${ _self.props.THE_HOST }/techshare`,
 			method: 'post',
 			data: {
-				token: _self.props.token
+				token: _self.props.token,
+				target: _self.state.target,
+				pageSize: _self.state.pageSize
 			},
 			type: 'json'
 		}).then( resp => {
 			if(resp.code === "1"){
+				if(resp.leftSide.length === 0){
+					_self.setState({
+						couldMore: false
+					})
+					message.warning('没有更多数据了', 2)
+					return 
+				}
+	
 				resp.leftSide.forEach( item => {
 					item.showAll = false
 				})
@@ -103,9 +116,18 @@ class Shareshow extends Component {
 					item.showAll = false
 				})
 				
+				let leftOld = _self.state.leftSide
+				let leftNew = leftOld.concat(resp.leftSide)
+				
+				let rightOld = _self.state.rightSide
+				let rightNew = rightOld.concat(resp.rightSide)
+				
+				let targetNew = this.state.target + 1 
+				
 				_self.setState({
-					leftSide: resp.leftSide,
-					rightSide: resp.rightSide
+					leftSide: leftNew,
+					rightSide: rightNew,
+					target: targetNew
 				})
 			}
 			else{
@@ -215,6 +237,15 @@ class Shareshow extends Component {
 							}
 						</Col>
 					</Row>
+					<div className="text-center">
+						{
+							( this.state.couldMore && this.state.leftSide.length )? 
+							<Button size="large" icon="download" onClick={
+								this.pullShare.bind(this)
+							} >加载更多</Button> :
+							void(0)
+						}
+					</div>
 				</div>
 			</div>
 		)
