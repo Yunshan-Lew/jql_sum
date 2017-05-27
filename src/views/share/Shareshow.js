@@ -170,13 +170,7 @@ class Shareshow extends Component {
 												{ item.username }
 											</b>
 										} extra={ <span className="color-blue">{ `发布于${ item.date }` }</span> } >
-											{
-												item.shareText.split('\n').map( ( text, line ) => (
-													<p key={ line } >
-														{ text.replace(/\t/g, '　　') }
-													</p>
-												) ) 
-											}
+											<div dangerouslySetInnerHTML={{ __html: item.shareText }} ></div>
 											{	
 												!item.showAll ?
 												<div className="bg-fff color-blue text-center show-all" onClick={ this.showSwift.bind(this, 'l', index) } >
@@ -207,14 +201,8 @@ class Shareshow extends Component {
 												<Icon type="notification" className="icon-right" />
 												{ item.username }
 											</b> 
-										} extra={ <span className="color-blue">{ `发布于${ item.date }` }</span> } key={ index } >
-											{
-												item.shareText.split('\n').map( ( text, line ) => (
-													<p key={ line } >
-														{ text.replace('\t', '　　') }
-													</p>
-												) ) 
-											}
+										} extra={ <span className="color-blue">{ `发布于${ item.date }` }</span> } >
+											<div dangerouslySetInnerHTML={{ __html: item.shareText }} ></div>
 											{
 												!item.showAll ?
 												<div className="bg-fff color-blue text-center show-all" onClick={ this.showSwift.bind(this, 'r', index) } >
