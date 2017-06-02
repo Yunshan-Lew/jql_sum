@@ -42,11 +42,12 @@ body{
 .icon-right{margin-right:5px;}
 .share-h{height:205px;}
 .show-all{width:100%;padding:10px 0;position:absolute;left:0;bottom:0;cursor:pointer;}
-.card-dash{border:1px solid #ddd;}
+.card-dash{border:1px solid #ddd;min-height:205px;}
 .card-dash > .ant-card-body{padding-bottom:40px;}
 .like-box{border:1px solid #ddd;margin:4px 0 40px;padding:10px 15px;border-radius:2px 2px 6px 6px;}
 .like-it{padding:0 4px;font-size:18px;}
 .set-form{width:400px;margin:0 auto;}
+.like-box > .pull-left{margin-top:3px;}
 
 /* Based on Sublime Text's Monokai theme */
 .cm-s-monokai.CodeMirror { background: #272822; color: #f8f8f2; }

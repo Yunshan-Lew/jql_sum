@@ -42,6 +42,12 @@ class Sharesubmit extends Component {
 	
 	subShare(){
 		let _self = this
+		
+		if(_self.state.shareText.length < 23){
+			message.error('分享长度不足15字')
+			return
+		}
+		
 		Confirm({
 			title: '温馨提示',
 			content: '提交后可在技术分享中查看，确认要提交？',

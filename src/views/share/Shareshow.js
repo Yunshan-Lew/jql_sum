@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Breadcrumb, message, Col, Row, Card, Icon, Button } from 'antd';
+import { Breadcrumb, message, Col, Row, Card, Icon, Button, Modal } from 'antd';
+import LzEditor from 'react-lz-editor';
 import reqwest from 'reqwest';
 
 class Shareshow extends Component {
@@ -9,9 +10,12 @@ class Shareshow extends Component {
 		this.state = {
 			leftSide: [],
 			rightSide: [],
-			pageSize: 6,
+			pageSize: 10,
 			target: 1,
-			couldMore: true
+			couldMore: true,
+			modalV: false,
+			forEdit: '',
+			dateEdit: ''
 		}
 	}
 	
@@ -138,11 +142,69 @@ class Shareshow extends Component {
 		})
 	}
 	
+	beginEdit(txt, date){
+		this.setState({
+			forEdit: txt,
+			dateEdit: date,
+			modalV: true
+		})
+	}
+	
+	subEdit(){
+		let _self = this
+		
+		if(_self.state.forEdit.length < 23){
+			message.error('分享长度不足15字')
+			return
+		}
+		
+		reqwest({
+			url: `${ _self.props.THE_HOST }/editshare`,
+			method: 'post',
+			data: {
+				"token": _self.props.token, 
+				"forEdit": _self.state.forEdit,
+				"date": _self.state.dateEdit
+			},
+			type: 'json'
+		}).then( resp => {
+			if(resp.code === "1"){
+				message.success(resp.message, 1.5, () => {
+					location.reload()
+				})
+			}
+			else{
+				message.warning(resp.message)
+			}
+		}, (err, msg) => {
+			message.warning('分享发布失败，请重试')
+		})
+	}
+	
+	receiveHtml(content) {
+		this.setState({
+			forEdit: content
+		})
+	}
+	
 	componentWillMount(){
 		
 	}
 	
 	render(){
+		const uploadConfig = {
+			QINIU_URL: "", //上传地址
+			QINIU_IMG_TOKEN_URL: "", //请求图片的token
+			QINIU_PFOP: {
+				url: "" //持久保存请求地址
+			},
+			QINIU_VIDEO_TOKEN_URL: "", //请求媒体资源的token
+			QINIU_FILE_TOKEN_URL: "", //其他资源的token的获取
+			QINIU_IMG_DOMAIN_URL: "", //图片文件地址的前缀
+			QINIU_DOMAIN_VIDEO_URL: "", //视频文件地址的前缀
+			QINIU_DOMAIN_FILE_URL: "" //其他文件地址前缀
+		}
+		
 		return (
 			<div>
 				<div className="bd-cnt">
@@ -182,6 +244,11 @@ class Shareshow extends Component {
 											}
 										</Card>
 										<div className="like-box text-right">
+											{
+												this.props.username === item.username ?
+												<Button type="default" size="small" icon="edit" className="pull-left" onClick={ this.beginEdit.bind(this, item.shareText, item.date) }>修改</Button> :
+												void(0)
+											}
 											喜欢？赞一个
 											<a className="like-it" onClick={ this.likeSwift.bind(this, item._id, 'l', index) } >
 												{ item.isFans ? <Icon type="like" /> : <Icon type="like-o" /> }
@@ -214,6 +281,11 @@ class Shareshow extends Component {
 											}
 										</Card>
 										<div className="like-box text-right">
+											{
+												this.props.username === item.username ?
+												<Button type="default" size="small" icon="edit" className="pull-left" onClick={ this.beginEdit.bind(this, item.shareText, item.date) }>修改</Button> :
+												void(0)
+											}
 											喜欢？赞一个
 											<a className="like-it" onClick={ this.likeSwift.bind(this, item._id, 'r', index) } >
 												{ item.isFans ? <Icon type="like" /> : <Icon type="like-o" /> }
@@ -227,13 +299,28 @@ class Shareshow extends Component {
 					</Row>
 					<div className="text-center">
 						{
-							( this.state.couldMore && this.state.leftSide.length )? 
+							( this.state.couldMore && this.state.leftSide.length ) ? 
 							<Button size="large" icon="download" onClick={
 								this.pullShare.bind(this)
 							} >加载更多</Button> :
 							void(0)
 						}
 					</div>
+					<Modal title="修改分享" width={ 1024 } visible={ this.state.modalV } maskClosable={ false } onOk={ this.subEdit.bind(this) } onCancel={ () => {
+						this.setState({
+							modalV: false
+						})
+					} } >
+						<LzEditor
+							active={ true }
+							importContent={ this.state.forEdit }
+							cbReceiver={ this.receiveHtml.bind(this) }
+							uploadConfig={ uploadConfig }
+							fullScreen={ false }
+							convertFormat="html"
+							autoSave={ false }
+						/>
+					</Modal>
 				</div>
 			</div>
 		)
@@ -248,7 +335,8 @@ class Shareshow extends Component {
 // lead stores in
 const mapStateToProps = state => ({
 	THE_HOST: state.todos.THE_HOST,
-	token: state.todos.token
+	token: state.todos.token,
+	username: state.userTodos.username
 })
 
 export default connect(mapStateToProps)(Shareshow)

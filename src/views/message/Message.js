@@ -70,7 +70,7 @@ class Message extends Component {
 						"token": _self.props.token, 
 						"thisWeek": _self.state.thisWeek, 
 						"nextWeek": _self.state.nextWeek,
-						"date": `${ yearStr }-${monStr }-${dateStr }`
+						"date": `${ yearStr }-${ monStr }-${ dateStr }`
 					},
 					type: 'json'
 				}).then( resp => {
