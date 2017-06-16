@@ -7,7 +7,8 @@ import reducer from './reducers';
 
 import { Layout } from 'antd';
 
-import Login from './views/login/Login';
+import Login from './views/account/Login';
+import Register from './views/account/Register';
 import User from './views/user/User';
 import TotalList from './views/totallist/Totallist';
 import Inside from './views/inside/Inside';
@@ -54,6 +55,7 @@ ReactDOM.render(
 	<Router history={ browserHistory } >
 		<Route path="/" component={ App }  >
 			<Route path="login" component={ Login } onEnter={ outRouteHook } />
+			<Route path="register" component={ Register } onEnter={ outRouteHook } />
 			<Route path="user" component={ User } onEnter={ logRouteHook } >
 				<Route path="totallist" component={ TotalList } />
 				<Route path="inside/:date" component={ Inside } />

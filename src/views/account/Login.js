@@ -7,7 +7,7 @@ import { test } from '../../actions/actionTest';
 import { Form, Icon, Input, Button, Layout, message } from 'antd';
 import reqwest from 'reqwest';
 
-import styles from './Login.css';
+import styles from './Account.css';
 
 const FormItem = Form.Item
 
@@ -109,6 +109,9 @@ class Login extends Component {
 							<Button type="primary" size="large" htmlType="submit" className={ styles['login-button'] } onClick={ this.entry.bind(this) }>
 								登录
 							</Button>
+							<p className="text-right">
+								若无账号，可以<a href="/register">注册</a>
+							</p>
 						</FormItem>
 					</Form>
 				</div>

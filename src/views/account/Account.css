@@ -1,4 +1,4 @@
-:local(.login-box){width:360px;height:360px;background:url(../../assets/logo@1x.png) center 11% no-repeat #fff;margin:0 auto;border-radius:6px;}
+:local(.login-box){width:360px;min-height:360px;background:url(../../assets/logo@1x.png) center 11% no-repeat #fff;margin:0 auto;border-radius:6px;}
 :local(.login-form){width:300px;margin:110px auto 0;}
 :local(.login-button){width:100%;background:#ff790b !important;border-color:#ff790b !important;}
 :local(.login-bt){position:fixed;left:0;bottom:40px;width:100%;color:#fff;}
