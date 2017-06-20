@@ -15,7 +15,7 @@ class Foot extends Component {
 	render(){
 		return (
 			<Footer className="jql-footer text-center">
-				<span className="font-14">&copy;2014-2017 JQL.CN Technolegy Department</span>
+				<span className="font-14">&copy;2014-{ new Date().getYear() + 1900 } JQL.CN Technolegy Department</span>
 			</Footer>
 		)
 	}

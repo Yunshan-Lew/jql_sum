@@ -157,7 +157,7 @@ class Register extends Component {
 					</Form>
 				</div>
 				<p className={ 'font-14 text-center ' + styles['login-bt'] }>
-					&copy;2014-2017 JQL.CN Technolegy Department
+					&copy;2014-{ new Date().getYear() + 1900 } JQL.CN Technolegy Department
 				</p>
 			</Layout>
 		)
