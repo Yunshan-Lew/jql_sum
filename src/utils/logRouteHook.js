@@ -7,7 +7,7 @@ const logRouteHook = (callbackState, replaceState, callback) => {
 		}
 	})
 	
-	if(!loginStatus)replaceState('/login')
+	if(!loginStatus)replaceState('/account/login')
 	
 	callback()
 }

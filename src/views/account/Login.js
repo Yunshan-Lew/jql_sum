@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { loginIn, pullLogin, pushToken } from '../../actions/actionLogin';
 import { test } from '../../actions/actionTest';
-import { Form, Icon, Input, Button, Layout, message } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
 import reqwest from 'reqwest';
 
 import styles from './Account.css';
@@ -15,8 +15,6 @@ class Login extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			minH: 'auto',
-			margT: 0,
 			user: '',
 			userError: '',
 			userMsg: '',
@@ -96,38 +94,26 @@ class Login extends Component {
 	
 	render(){
 		return (
-			<Layout className={ styles['login-bg'] } style={ { minHeight: this.state.minH } }>
-				<div className={ styles['login-box'] } style={ { marginTop: this.state.margT } }>
-					<Form className={ styles['login-form'] }>
-						<FormItem validateStatus={ this.state.userError } help={ this.state.userMsg }>
-							<Input addonBefore={ <Icon type="user" /> } placeholder="用户名" value={ this.state.user } onChange={ this.userChange.bind(this) } />
-						</FormItem>
-						<FormItem validateStatus={ this.state.passError } help={ this.state.passMsg }>
-							<Input addonBefore={ <Icon type="lock" /> } type="password" placeholder="登录密码" value={ this.state.password } onChange={ this.passChange.bind(this) } />
-						</FormItem>
-						<FormItem>
-							<Button type="primary" size="large" htmlType="submit" className={ styles['login-button'] } onClick={ this.entry.bind(this) }>
-								登录
-							</Button>
-							<p className="text-right">
-								若无账号，可以<a href="/register">注册</a>
-							</p>
-						</FormItem>
-					</Form>
-				</div>
-				<p className={ 'font-14 text-center ' + styles['login-bt'] }>
-					&copy;2014-{ new Date().getYear() + 1900 } JQL.CN Technolegy Department
-				</p>
-			</Layout>
+			<Form className={ styles['login-form'] }>
+				<FormItem validateStatus={ this.state.userError } help={ this.state.userMsg }>
+					<Input addonBefore={ <Icon type="user" /> } placeholder="用户名" value={ this.state.user } onChange={ this.userChange.bind(this) } />
+				</FormItem>
+				<FormItem validateStatus={ this.state.passError } help={ this.state.passMsg }>
+					<Input addonBefore={ <Icon type="lock" /> } type="password" placeholder="登录密码" value={ this.state.password } onChange={ this.passChange.bind(this) } />
+				</FormItem>
+				<FormItem>
+					<Button type="primary" size="large" htmlType="submit" className={ styles['login-button'] } onClick={ this.entry.bind(this) }>
+						登录
+					</Button>
+					<p className="text-right">
+						若无账号，可以<Link to="/account/register">注册</Link>
+					</p>
+				</FormItem>
+			</Form>
 		)
 	}
 		
 	componentDidMount(){
-		let H = document.documentElement.clientHeight
-		this.setState({ 
-			minH: `${ H }px`, 
-			margT: `${ ( H - 360 ) / 2.2 }px`
-		})
 		this.props.test('试验-1已启动')
 	}
 			

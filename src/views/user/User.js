@@ -62,7 +62,7 @@ class User extends Component {
 								</Link>
 							</Menu.Item>
 							<Menu.Item key="5" className="menu-high">
-								<Link to="/user/password">
+								<Link to="/set/password">
 									<Icon type="setting" className="font-14" />
 									<span className="nav-text font-14">修改密码</span>
 								</Link>

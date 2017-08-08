@@ -7,6 +7,7 @@ import reducer from './reducers';
 
 import { Layout } from 'antd';
 
+import Account from './views/account/Account';
 import Login from './views/account/Login';
 import Register from './views/account/Register';
 import User from './views/user/User';
@@ -54,8 +55,11 @@ const App = React.createClass({
 ReactDOM.render(
 	<Router history={ browserHistory } >
 		<Route path="/" component={ App }  >
-			<Route path="login" component={ Login } onEnter={ outRouteHook } />
-			<Route path="register" component={ Register } onEnter={ outRouteHook } />
+			<Route path="account" component={ Account } onEnter={ outRouteHook } >
+				<Route path="login" component={ Login } />
+				<Route path="register" component={ Register } />
+				<IndexRedirect to="/account/login" />
+			</Route>
 			<Route path="user" component={ User } onEnter={ logRouteHook } >
 				<Route path="totallist" component={ TotalList } />
 				<Route path="inside/:date" component={ Inside } />
@@ -63,8 +67,10 @@ ReactDOM.render(
 				<Route path="message" component={ Message } />
 				<Route path="sharesubmit" component={ Sharesubmit } />
 				<Route path="shareshow" component={ Shareshow } />
-				<Route path="password" component={ Password } />
 				<IndexRedirect to="/user/totallist" />
+			</Route>
+			<Route path="set" component={ User } onEnter={ logRouteHook } >
+				<Route path="password" component={ Password } />
 			</Route>
 			// 匹配空
 			<IndexRedirect to="/user" />

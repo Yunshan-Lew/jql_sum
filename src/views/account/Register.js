@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Layout, message, Select } from 'antd';
+import { Form, Icon, Input, Button, message, Select } from 'antd';
 import reqwest from 'reqwest';
 
 import styles from './Account.css';
@@ -13,9 +13,6 @@ class Register extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			minH: 'auto',
-			margT: 0,
-			
 			user: '',
 			userError: '',
 			userMsg: '',
@@ -126,50 +123,38 @@ class Register extends Component {
 	
 	render(){
 		return (
-			<Layout className={ styles['login-bg'] } style={ { minHeight: this.state.minH } }>
-				<div className={ styles['login-box'] } style={ { marginTop: this.state.margT } } ref="regBox">
-					<Form className={ styles['login-form'] }>
-						<FormItem validateStatus={ this.state.userError } help={ this.state.userMsg }>
-							<Input addonBefore={ <Icon type="user" /> } placeholder="用户名" value={ this.state.user } onChange={ (e) => { this.setState({ user: e.target.value }) } } />
-						</FormItem>
-						<FormItem>
-							<Select defaultValue="请选择职位" size="large" onChange={ (value) => { this.setState({ "job": value }) } }>
-								<Option value="请选择职位">请选择职位</Option>
-								<Option value="洗碗工">洗碗工</Option>
-								<Option value="扫地工">扫地工</Option>
-								<Option value="搬砖工">搬砖工</Option>
-							</Select>
-						</FormItem>
-						<FormItem validateStatus={ this.state.passError } help={ this.state.passMsg }>
-							<Input addonBefore={ <Icon type="unlock" /> } type="password" placeholder="登录密码" value={ this.state.password } onChange={ (e) => { this.setState({ password: e.target.value }) } } />
-						</FormItem>
-						<FormItem validateStatus={ this.state.repeatError } help={ this.state.repeatMsg }>
-							<Input addonBefore={ <Icon type="lock" /> } type="password" placeholder="请重复登录密码" value={ this.state.passwordRepeat } onChange={ (e) => { this.setState({ passwordRepeat: e.target.value }) } } />
-						</FormItem>
-						<FormItem>
-							<Button type="primary" size="large" htmlType="submit" className={ styles['login-button'] } onClick={ this.register.bind(this) }>
-								注册
-							</Button>
-							<p className="text-right">
-								已有账号，可以<a href="/login">登录</a>
-							</p>
-						</FormItem>
-					</Form>
-				</div>
-				<p className={ 'font-14 text-center ' + styles['login-bt'] }>
-					&copy;2014-{ new Date().getYear() + 1900 } JQL.CN Technolegy Department
-				</p>
-			</Layout>
+			<Form className={ styles['login-form'] }>
+				<FormItem validateStatus={ this.state.userError } help={ this.state.userMsg }>
+					<Input addonBefore={ <Icon type="user" /> } placeholder="用户名" value={ this.state.user } onChange={ (e) => { this.setState({ user: e.target.value }) } } />
+				</FormItem>
+				<FormItem>
+					<Select defaultValue="请选择职位" size="large" onChange={ (value) => { this.setState({ "job": value }) } }>
+						<Option value="请选择职位">请选择职位</Option>
+						<Option value="洗碗工">洗碗工</Option>
+						<Option value="扫地工">扫地工</Option>
+						<Option value="搬砖工">搬砖工</Option>
+					</Select>
+				</FormItem>
+				<FormItem validateStatus={ this.state.passError } help={ this.state.passMsg }>
+					<Input addonBefore={ <Icon type="unlock" /> } type="password" placeholder="登录密码" value={ this.state.password } onChange={ (e) => { this.setState({ password: e.target.value }) } } />
+				</FormItem>
+				<FormItem validateStatus={ this.state.repeatError } help={ this.state.repeatMsg }>
+					<Input addonBefore={ <Icon type="lock" /> } type="password" placeholder="请重复登录密码" value={ this.state.passwordRepeat } onChange={ (e) => { this.setState({ passwordRepeat: e.target.value }) } } />
+				</FormItem>
+				<FormItem>
+					<Button type="primary" size="large" htmlType="submit" className={ styles['login-button'] } onClick={ this.register.bind(this) }>
+						注册
+					</Button>
+					<p className="text-right">
+						已有账号，可以<Link to="/account/login">登录</Link>
+					</p>
+				</FormItem>
+			</Form>
 		)
 	}
 		
 	componentDidMount(){
-		let H = document.documentElement.clientHeight
-		let h = this.refs.regBox.clientHeight
-		this.setState({ 
-			minH: `${ H }px`, 
-			margT: `${ ( H - h ) / 2.2 }px`
-		})
+		
 	}
 			
 }
