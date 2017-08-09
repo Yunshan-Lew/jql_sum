@@ -19,7 +19,7 @@ class Head extends Component {
 	exit(){
 		let { dispatch } = this.props
 		dispatch(loginOut()) // 方式 - 直接引用actions
-		this.props.routerPush({ pathname: '/login' })
+		this.props.routerPush({ pathname: '/account/login' })
 	}
 	
 	render(){
