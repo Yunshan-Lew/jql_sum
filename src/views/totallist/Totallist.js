@@ -98,7 +98,7 @@ class TotalList extends Component {
 	}
 	
 	componentDidMount(){
-		this.props.catchCurrent('1')
+		this.props.catchCurrent('sub1', '1')
 		this.pullData()
 	}
 }

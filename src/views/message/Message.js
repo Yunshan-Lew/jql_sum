@@ -153,7 +153,7 @@ class Message extends Component {
 	}
 	
 	componentDidMount(){
-		this.props.catchCurrent('2')
+		this.props.catchCurrent('sub1', '2')
 		if(new Date().getDay() !== 5){
 			// 设为无效
 			this.notOnTime()

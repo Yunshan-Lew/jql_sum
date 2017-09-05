@@ -183,7 +183,7 @@ class Summary extends Component {
 	
 	componentDidMount(){
 		let _self = this
-		_self.props.catchCurrent('1')
+		_self.props.catchCurrent('sub1', '1')
 		_self.readDetail()
 	}
 }

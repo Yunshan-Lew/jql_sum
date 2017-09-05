@@ -27,7 +27,7 @@ body{
 .jql-logo{width:150px;height:38px;background:url(./assets/logo@1x.png) center no-repeat;margin:26px 0 0 0;}
 .slogan{width:128px;height:24px;background:url(./assets/slogan@1x.png) center no-repeat;margin:33px 0 0 10px;}
 .head-btn{margin-top:31px;height:28px;line-height:28px;}
-.ant-menu-inline > .ant-menu-item.menu-high{height:49px;line-height:49px;}
+.ant-menu-inline .ant-menu-submenu-title{height:49px;line-height:49px;}
 .jql-footer{height:90px;background:#fff;border-top:1px solid #ddd;}
 .cnt-inner{margin:0 45px 45px;padding:60px;background:#fff;border-radius:6px;}
 .ant-table-thead > tr > th, .ant-table-tbody > tr > td{text-align:center;}
