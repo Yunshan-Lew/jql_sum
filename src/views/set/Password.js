@@ -179,7 +179,7 @@ class Password extends Component {
 	}
 	
 	componentDidMount(){
-		this.props.catchCurrent('sub3', '5')
+		this.props.catchCurrent('sub3', 'sub3-1')
 	}
 }
 

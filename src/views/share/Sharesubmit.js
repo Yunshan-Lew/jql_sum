@@ -130,7 +130,7 @@ class Sharesubmit extends Component {
 	}
 	
 	componentDidMount(){
-		this.props.catchCurrent('sub2', '4')
+		this.props.catchCurrent('sub2', 'sub2-2')
 		// 设未完离开提示
 		this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this))
 		

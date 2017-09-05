@@ -327,7 +327,7 @@ class Shareshow extends Component {
 	}
 	
 	componentDidMount(){
-		this.props.catchCurrent('sub2', '3')
+		this.props.catchCurrent('sub2', 'sub2-1')
 		this.pullShare()
 	}
 }

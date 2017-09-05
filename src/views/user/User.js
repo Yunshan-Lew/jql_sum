@@ -47,12 +47,12 @@ class User extends Component {
 						<Menu theme="dark" mode="inline" openKeys={ [this.state.subCurrent] } selectedKeys={ [this.state.current] } className="jql-menu">
 							
 							<Menu.SubMenu key="sub1" title={ <span className="font-14"><Icon type="file-text" /><span>总结管理</span></span> } onTitleClick={ this.subSwift.bind(this) } >
-								<Menu.Item key="1" className="menu-high" >
+								<Menu.Item key="sub1-1" className="menu-high" >
 									<Link to="/user/totallist">
 										<span className="nav-text">总结汇总</span>
 									</Link>
 								</Menu.Item>
-								<Menu.Item key="2" className="menu-high">
+								<Menu.Item key="sub1-2" className="menu-high">
 									<Link to="/user/message">
 										<span className="nav-text">总结提交</span>
 									</Link>
@@ -60,12 +60,12 @@ class User extends Component {
 							</Menu.SubMenu>
 							
 							<Menu.SubMenu key="sub2" title={ <span className="font-14"><Icon type="share-alt" /><span>分享管理</span></span> }  onTitleClick={ this.subSwift.bind(this) } >
-								<Menu.Item key="3" className="menu-high">
+								<Menu.Item key="sub2-1" className="menu-high">
 									<Link to="/user/shareshow">
 										<span className="nav-text">技术分享</span>
 									</Link>
 								</Menu.Item>
-								<Menu.Item key="4" className="menu-high">
+								<Menu.Item key="sub2-2" className="menu-high">
 									<Link to="/user/sharesubmit">
 										<span className="nav-text">发布分享</span>
 									</Link>
@@ -73,7 +73,7 @@ class User extends Component {
 							</Menu.SubMenu>
 							
 							<Menu.SubMenu key="sub3" title={ <span className="font-14"><Icon type="setting" /><span>设置</span></span> } onTitleClick={ this.subSwift.bind(this) } >
-								<Menu.Item key="5" className="menu-high">
+								<Menu.Item key="sub3-1" className="menu-high">
 									<Link to="/set/password">
 										<span className="nav-text">修改密码</span>
 									</Link>

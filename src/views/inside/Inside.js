@@ -103,7 +103,7 @@ class Inside extends Component {
 	}
 	
 	componentDidMount(){
-		this.props.catchCurrent('sub1', '1')
+		this.props.catchCurrent('sub1', 'sub1-1')
 		this.pullData()
 	}
 }
