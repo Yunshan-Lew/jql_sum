@@ -28,6 +28,7 @@ class User extends Component {
 	}
 	
 	subSwift({ key, domEvent }){
+		key = key === this.state.subCurrent ? '' : key
 		this.setState({
 			subCurrent: key
 		})
